@@ -19,99 +19,95 @@
 
 <div class="app">
 
+    <aside class="sidebar">
 
-<aside class="sidebar">
+        <div class="header">
 
-    <div class="header">
+            <div class="eyebrow">
+                Planifica tu escapada
+            </div>
 
-        <div class="eyebrow">
-            Planifica tu escapada
+            <h1>
+                Casas rurales · Comparador
+            </h1>
+
+            <div class="sub" id="subtitle">
+                Alojamientos por el País Vasco y alrededores
+            </div>
+
         </div>
 
-        <h1>
-            Casas rurales · Comparador
-        </h1>
+        <div class="filters">
 
-        <div class="sub" id="subtitle">
-            Alojamientos por el País Vasco y alrededores
+            <select id="sort" aria-label="Ordenar por">
+
+                <option value="recommended">
+                    Orden recomendado
+                </option>
+
+                <option value="priceAsc">
+                    Precio: menor a mayor
+                </option>
+
+                <option value="priceDesc">
+                    Precio: mayor a menor
+                </option>
+
+            </select>
+
+            <select id="people" aria-label="Número de personas">
+
+                <option value="0">
+                    Cualquier grupo
+                </option>
+
+                <option value="8">
+                    8+ personas
+                </option>
+
+                <option value="10">
+                    10+ personas
+                </option>
+
+                <option value="12">
+                    12+ personas
+                </option>
+
+            </select>
+
         </div>
 
-    </div>
 
+        <div class="search-wrap">
 
-    <div class="filters">
+            <input
+                class="search"
+                id="search"
+                placeholder="Buscar por nombre o zona…"
+                aria-label="Buscar alojamiento">
 
-        <select id="sort" aria-label="Ordenar por">
-
-            <option value="recommended">
-                Orden recomendado
-            </option>
-
-            <option value="priceAsc">
-                Precio: menor a mayor
-            </option>
-
-            <option value="priceDesc">
-                Precio: mayor a menor
-            </option>
-
-        </select>
-
-
-        <select id="people" aria-label="Número de personas">
-
-            <option value="0">
-                Cualquier grupo
-            </option>
-
-            <option value="8">
-                8+ personas
-            </option>
-
-            <option value="10">
-                10+ personas
-            </option>
-
-            <option value="12">
-                12+ personas
-            </option>
-
-        </select>
-
-    </div>
-
-
-    <div class="search-wrap">
-
-        <input
-            class="search"
-            id="search"
-            placeholder="Buscar por nombre o zona…"
-            aria-label="Buscar alojamiento">
-
-    </div>
-
-
-    <div class="results">
-
-        <div
-            class="result-count"
-            id="count">
         </div>
 
-        <div id="list"></div>
 
-    </div>
+        <div class="results">
+
+            <div
+                class="result-count"
+                id="count">
+            </div>
+
+            <div id="list"></div>
+
+        </div>
 
 
-    <div class="footer">
+        <div class="footer">
 
-        Datos y precios orientativos · Comprueba las condiciones con cada alojamiento.
+            Datos y precios orientativos · Comprueba las condiciones con cada alojamiento.
 
-    </div>
+        </div>
 
-</aside>
-
+    </aside>
 
 <main class="map-wrap">
 
@@ -122,10 +118,10 @@
 
 
     <div class="map-note">
-
         📍 Pulsa un precio o alojamiento para ver detalles
-
     </div>
+
+    <section class="detail" id="detail"></section>
 
 </main>
 
