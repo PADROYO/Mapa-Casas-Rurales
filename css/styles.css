@@ -6,9 +6,10 @@
     --soft: #f4f7fb;
 }
 
+
 /* =========================
    RESET
-   ========================= */
+========================= */
 
 * {
     box-sizing: border-box;
@@ -24,6 +25,7 @@ body {
 body {
     font-family: Inter, ui-sans-serif, system-ui, -apple-system,
         BlinkMacSystemFont, "Segoe UI", sans-serif;
+
     color: var(--ink);
     background: #fff;
 }
@@ -31,7 +33,7 @@ body {
 
 /* =========================
    ESTRUCTURA PRINCIPAL
-   ========================= */
+========================= */
 
 .app {
     width: 100%;
@@ -46,7 +48,7 @@ body {
 
 /* =========================
    SIDEBAR / COMPARADOR
-   ========================= */
+========================= */
 
 .sidebar {
     width: 390px;
@@ -69,9 +71,12 @@ body {
 
 .eyebrow {
     font-size: 11px;
+
     text-transform: uppercase;
     letter-spacing: .13em;
+
     font-weight: 800;
+
     color: var(--red);
 }
 
@@ -86,16 +91,18 @@ h1 {
 
 .sub {
     color: var(--muted);
+
     font-size: 13px;
 }
 
 
 /* =========================
    FILTROS
-   ========================= */
+========================= */
 
 .filters {
     display: flex;
+
     gap: 8px;
 
     padding: 0 18px 15px;
@@ -106,14 +113,17 @@ h1 {
 .filters select,
 .search {
     border: 1px solid var(--line);
+
     border-radius: 12px;
 
     padding: 10px 11px;
 
     background: #fff;
+
     color: var(--ink);
 
     font: inherit;
+
     font-size: 12px;
 
     min-width: 0;
@@ -129,13 +139,14 @@ h1 {
 
 .search {
     width: 100%;
+
     font-size: 13px;
 }
 
 
 /* =========================
    LISTA DE ALOJAMIENTOS
-   ========================= */
+========================= */
 
 .results {
     padding: 0 14px 18px;
@@ -148,7 +159,9 @@ h1 {
 
 .result-count {
     font-size: 11px;
+
     color: var(--muted);
+
     font-weight: 700;
 
     padding: 0 5px 10px;
@@ -156,11 +169,13 @@ h1 {
 
 .house {
     border: 1px solid var(--line);
+
     border-radius: 15px;
 
     padding: 11px;
 
     display: grid;
+
     grid-template-columns: 106px minmax(0, 1fr);
 
     gap: 12px;
@@ -177,6 +192,7 @@ h1 {
 .house:hover,
 .house.active {
     border-color: #76a9ff;
+
     box-shadow: 0 0 0 2px #e9f2ff;
 }
 
@@ -201,6 +217,7 @@ h1 {
 
 .place {
     font-size: 11px;
+
     color: var(--muted);
 
     margin-bottom: 8px;
@@ -251,7 +268,7 @@ h1 {
 
 /* =========================
    MAPA
-   ========================= */
+========================= */
 
 .map-wrap {
     position: relative;
@@ -273,7 +290,7 @@ h1 {
 
 /* =========================
    AVISO DEL MAPA
-   ========================= */
+========================= */
 
 .map-note {
     position: absolute;
@@ -299,7 +316,7 @@ h1 {
 
 /* =========================
    MARCADORES DE PRECIO
-   ========================= */
+========================= */
 
 .price-marker {
     background: var(--red);
@@ -324,7 +341,7 @@ h1 {
 
 /* =========================
    POPUPS DE LEAFLET
-   ========================= */
+========================= */
 
 .leaflet-popup-content-wrapper {
     border-radius: 14px;
@@ -364,12 +381,16 @@ h1 {
     font-weight: 700;
 
     font-size: 12px;
+
+    border: 0;
+
+    cursor: pointer;
 }
 
 
-/* =========================
+/* =====================================================
    FICHA DE ALOJAMIENTO
-   ========================= */
+===================================================== */
 
 .detail {
     position: absolute;
@@ -379,7 +400,9 @@ h1 {
     right: 18px;
     top: 18px;
 
-    width: 320px;
+    width: 390px;
+
+    max-width: calc(100% - 36px);
 
     max-height: calc(100% - 36px);
 
@@ -396,24 +419,156 @@ h1 {
     display: none;
 }
 
-.detail.show {
+.detail.active {
     display: block;
 }
 
-.detail-photo {
-    height: 170px;
+
+/* =========================
+   CARRUSEL
+========================= */
+
+.detail-carousel {
+    position: relative;
 
     width: 100%;
 
-    object-fit: cover;
+    /*
+       Tamaño máximo de la zona de imagen.
+       La imagen nunca superará este tamaño.
+    */
+    height: 280px;
 
-    display: block;
+    overflow: hidden;
 
-    background: #edf1f5;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #f3f5f7;
+
+    border-radius: 18px 18px 0 0;
 }
 
-.detail-body {
+
+/* =========================
+   IMAGEN DEL CARRUSEL
+========================= */
+
+.detail-image {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    /*
+       IMPORTANTE:
+       contain evita que se recorte la fotografía.
+    */
+    object-fit: contain;
+
+    object-position: center;
+
+    margin: 0 auto;
+
+    background: #f3f5f7;
+}
+
+
+/* =========================
+   FLECHAS DEL CARRUSEL
+========================= */
+
+.carousel-prev,
+.carousel-next {
+    position: absolute;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    color: white;
+
+    font-size: 28px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 5;
+
+    transition: background .15s;
+}
+
+.carousel-prev {
+    left: 12px;
+}
+
+.carousel-next {
+    right: 12px;
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+    background: rgba(0, 0, 0, 0.75);
+}
+
+
+/* =========================
+   CONTADOR DE FOTOS
+========================= */
+
+.photo-counter {
+    position: absolute;
+
+    bottom: 10px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    background: rgba(0, 0, 0, 0.6);
+
+    color: white;
+
+    font-size: 11px;
+
+    z-index: 5;
+}
+
+
+/* =========================
+   CONTENIDO DE LA FICHA
+========================= */
+
+.detail-content {
     padding: 17px;
+}
+
+.detail-location {
+    color: var(--muted);
+
+    font-size: 12px;
+
+    margin-bottom: 4px;
 }
 
 .detail h2 {
@@ -424,15 +579,7 @@ h1 {
     margin: 0 0 5px;
 }
 
-.detail .location {
-    color: var(--muted);
-
-    font-size: 12px;
-
-    margin-bottom: 13px;
-}
-
-.detail .bigprice {
+.detail-price {
     font-size: 29px;
 
     color: var(--red);
@@ -440,9 +587,11 @@ h1 {
     font-weight: 850;
 
     letter-spacing: -.05em;
+
+    margin-bottom: 13px;
 }
 
-.detail .bigprice span {
+.detail-price span {
     font-size: 12px;
 
     color: var(--muted);
@@ -452,7 +601,12 @@ h1 {
     letter-spacing: 0;
 }
 
-.detail-grid {
+
+/* =========================
+   ESTADÍSTICAS
+========================= */
+
+.detail-stats {
     display: grid;
 
     grid-template-columns: 1fr 1fr;
@@ -462,7 +616,7 @@ h1 {
     margin: 13px 0;
 }
 
-.detail-stat {
+.detail-stats > div {
     padding: 10px;
 
     background: var(--soft);
@@ -472,13 +626,46 @@ h1 {
     font-size: 12px;
 }
 
-.detail-stat b {
-    display: block;
-
-    margin-bottom: 3px;
+.detail-stats strong {
+    margin-right: 4px;
 }
 
-.description {
+.detail-stats span {
+    font-weight: 800;
+
+    font-size: 15px;
+}
+
+.detail-stats small {
+    display: block;
+
+    margin-top: 2px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+
+/* =========================
+   SECCIONES
+========================= */
+
+.detail-section {
+    margin-top: 17px;
+}
+
+.detail-section h4 {
+    margin: 0 0 8px;
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+.detail-section p {
+    margin: 0;
+
     font-size: 13px;
 
     line-height: 1.55;
@@ -488,20 +675,83 @@ h1 {
 
 
 /* =========================
-   BOTONES
-   ========================= */
+   CARACTERÍSTICAS
+========================= */
 
-.actions {
+.detail-features {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+}
+
+.detail-features span {
+    background: var(--soft);
+
+    border-radius: 7px;
+
+    padding: 5px 7px;
+
+    font-size: 11px;
+
+    color: #59677b;
+}
+
+
+/* =========================
+   BOTÓN CERRAR
+========================= */
+
+.detail-close {
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    z-index: 10;
+
+    width: 30px;
+    height: 30px;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.9);
+
+    color: var(--ink);
+
+    font-size: 20px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================
+   BOTONES DE ACCIÓN
+========================= */
+
+.detail-actions {
     display: flex;
 
     flex-direction: column;
 
     gap: 8px;
 
-    margin-top: 15px;
+    margin-top: 17px;
 }
 
-.btn {
+.detail-button {
     display: block;
 
     text-align: center;
@@ -525,7 +775,7 @@ h1 {
     cursor: pointer;
 }
 
-.btn.primary {
+.detail-button.primary {
     background: var(--red);
 
     border-color: var(--red);
@@ -533,27 +783,25 @@ h1 {
     color: white;
 }
 
-.close {
-    float: right;
 
-    border: 0;
+/* =========================
+   AVISO DE PRECIO
+========================= */
 
-    background: #f1f4f8;
+.detail-note {
+    margin-top: 13px;
 
-    border-radius: 50%;
+    font-size: 10px;
 
-    width: 29px;
-    height: 29px;
+    line-height: 1.45;
 
-    cursor: pointer;
-
-    font-size: 17px;
+    color: #8a95a5;
 }
 
 
 /* =========================
    ESTADO VACÍO
-   ========================= */
+========================= */
 
 .empty {
     padding: 20px;
@@ -566,7 +814,7 @@ h1 {
 
 /* =========================
    FOOTER
-   ========================= */
+========================= */
 
 .footer {
     font-size: 10px;
@@ -581,7 +829,7 @@ h1 {
 
 /* =====================================================
    TABLET / MÓVIL
-   ===================================================== */
+===================================================== */
 
 @media (max-width: 800px) {
 
@@ -614,7 +862,7 @@ h1 {
 
     /* -------------------------
        COMPARADOR
-       ------------------------- */
+    ------------------------- */
 
     .sidebar {
         width: 100%;
@@ -641,7 +889,7 @@ h1 {
 
     /* -------------------------
        FILTROS
-       ------------------------- */
+    ------------------------- */
 
     .filters {
         padding: 0 15px 12px;
@@ -664,7 +912,7 @@ h1 {
 
     /* -------------------------
        LISTA
-       ------------------------- */
+    ------------------------- */
 
     .results {
         flex: none;
@@ -706,7 +954,7 @@ h1 {
 
     /* -------------------------
        MAPA
-       ------------------------- */
+    ------------------------- */
 
     .map-wrap {
         width: 100%;
@@ -735,25 +983,39 @@ h1 {
 
     /* -------------------------
        FICHA
-       ------------------------- */
+    ------------------------- */
 
     .detail {
         top: 58px;
 
         right: 10px;
 
-        width: min(310px, calc(100% - 20px));
+        width: min(390px, calc(100% - 20px));
 
         max-height: calc(100% - 70px);
 
         border-radius: 16px;
     }
 
-    .detail-photo {
-        height: 155px;
+
+    /* -------------------------
+       CARRUSEL MÓVIL
+    ------------------------- */
+
+    .detail-carousel {
+        height: 250px;
+
+        border-radius: 16px 16px 0 0;
     }
 
-    .detail-body {
+    .detail-image {
+        width: 100%;
+        height: 100%;
+
+        object-fit: contain;
+    }
+
+    .detail-content {
         padding: 15px;
     }
 
@@ -761,14 +1023,22 @@ h1 {
         font-size: 18px;
     }
 
-    .detail .bigprice {
+    .detail-price {
+        font-size: 25px;
+    }
+
+    .carousel-prev,
+    .carousel-next {
+        width: 36px;
+        height: 36px;
+
         font-size: 25px;
     }
 
 
     /* -------------------------
        FOOTER
-       ------------------------- */
+    ------------------------- */
 
     .footer {
         padding: 8px 15px;
@@ -778,7 +1048,7 @@ h1 {
 
 /* =====================================================
    MÓVILES PEQUEÑOS
-   ===================================================== */
+===================================================== */
 
 @media (max-width: 480px) {
 
@@ -849,5 +1119,9 @@ h1 {
         width: calc(100% - 20px);
 
         right: 10px;
+    }
+
+    .detail-carousel {
+        height: 220px;
     }
 }
