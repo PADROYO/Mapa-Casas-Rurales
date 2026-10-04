@@ -1,26 +1,59 @@
 const money = n =>
-new Intl.NumberFormat("es-ES", {
-style: "currency",
-currency: "EUR",
-maximumFractionDigits: 0
-}).format(n);
+    new Intl.NumberFormat("es-ES", {
+        style: "currency",
+        currency: "EUR",
+        maximumFractionDigits: 0
+    }).format(n);
+
 
 /* =========================
-MAPA
+   MAPA
 ========================= */
 
-const map = L.map('map');
+const map = L.map("map");
 
 L.tileLayer(
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     {
         maxZoom: 19,
-        attribution: '&copy; OpenStreetMap contributors'
+        attribution: "&copy; OpenStreetMap contributors"
     }
 ).addTo(map);
 
+
 const markers = new Map();
+
 let selectedId = null;
+let currentPhoto = 0;
+
+
+/* =========================
+   ICONO DEL PRECIO
+========================= */
+
+function markerIcon(price) {
+
+    return L.divIcon({
+
+        className: "",
+
+        html: `
+            <div class="price-marker">
+                ${money(price)}
+            </div>
+        `,
+
+        iconSize: null,
+        iconAnchor: [35, 17]
+
+    });
+
+}
+
+
+/* =========================
+   CREAR MARCADORES
+========================= */
 
 houses.forEach(h => {
 
@@ -31,14 +64,49 @@ houses.forEach(h => {
         }
     ).addTo(map);
 
-    marker.on('click', () => {
-        window.location.href = h.page;
+
+    marker.bindPopup(`
+
+        <div class="popup-title">
+            ${escapeHtml(h.name)}
+        </div>
+
+        <div>
+            ${escapeHtml(h.area)}
+        </div>
+
+        <div class="popup-price">
+            ${money(h.price)}
+        </div>
+
+        <button
+            class="popup-link"
+            type="button"
+            onclick="selectHouse(${h.id})">
+
+            Ver alojamiento
+
+        </button>
+
+    `);
+
+
+    marker.on("click", () => {
+
+        selectHouse(h.id);
+
     });
 
+
     markers.set(h.id, marker);
+
 });
 
-// Centrar el mapa automáticamente en todas las casas
+
+/* =========================
+   CENTRAR MAPA
+========================= */
+
 const bounds = L.latLngBounds(
     houses.map(h => [h.lat, h.lng])
 );
@@ -47,225 +115,526 @@ map.fitBounds(bounds, {
     padding: [50, 50]
 });
 
+
 /* =========================
-ICONO DEL PRECIO
+   FILTROS
 ========================= */
 
-function markerIcon(price){
+function visibleHouses() {
+
+    let arr = houses.filter(h => {
+
+        const q =
+            document
+                .getElementById("search")
+                .value
+                .trim()
+                .toLowerCase();
 
 
-return L.divIcon({
+        const min =
+            Number(
+                document
+                    .getElementById("people")
+                    .value
+            );
 
-    className: "",
 
-    html:
-        `<div class="price-marker">
-            ${money(price)}
-        </div>`,
+        return (
 
-    iconSize: null,
+            (
+                !q ||
+                (h.name + " " + h.area)
+                    .toLowerCase()
+                    .includes(q)
+            )
 
-    iconAnchor: [35, 17]
+            &&
 
-});
+            h.people >= min
 
+        );
+
+    });
+
+
+    const sort =
+        document
+            .getElementById("sort")
+            .value;
+
+
+    if (sort === "priceAsc") {
+
+        arr.sort(
+            (a, b) => a.price - b.price
+        );
+
+    }
+
+
+    if (sort === "priceDesc") {
+
+        arr.sort(
+            (a, b) => b.price - a.price
+        );
+
+    }
+
+
+    return arr;
 
 }
 
+
 /* =========================
-CREAR MARCADORES
+   LISTADO
 ========================= */
 
-houses.forEach(h => {
+function renderList() {
+
+    const arr = visibleHouses();
 
 
-const marker = L.marker(
-    [h.lat, h.lng],
-    {
-        icon: markerIcon(h.price)
+    document.getElementById("count").textContent =
+        `${arr.length} alojamiento${arr.length === 1 ? "" : "s"}`;
+
+
+    document.getElementById("subtitle").textContent =
+        `${houses.length} alojamientos · precios orientativos`;
+
+
+    const list =
+        document.getElementById("list");
+
+
+    list.innerHTML = "";
+
+
+    if (!arr.length) {
+
+        list.innerHTML = `
+            <div class="empty">
+                No hay alojamientos que coincidan con la búsqueda.
+            </div>
+        `;
+
+        return;
+
     }
-).addTo(map);
 
 
-marker.bindPopup(`
+    arr.forEach(h => {
 
-    <div class="popup-title">
-        ${escapeHtml(h.name)}
-    </div>
-
-    <div>
-        ${escapeHtml(h.area)}
-    </div>
-
-    <div class="popup-price">
-        ${money(h.price)}
-    </div>
-
-    <a
-        class="popup-link"
-        href="${escapeHtml(h.page)}">
-
-        Ver alojamiento ↗
-
-    </a>
-
-`);
+        const el =
+            document.createElement("article");
 
 
-markers.set(h.id, marker);
+        el.className = "house";
 
 
-});
+        el.innerHTML = `
 
-/* =========================
-FILTROS
-========================= */
+            <img
+                src="${escapeHtml(h.image)}"
+                alt="${escapeHtml(h.name)}"
+                loading="lazy"
+            >
 
-function visibleHouses(){
+            <div>
+
+                <h3>
+                    ${escapeHtml(h.name)}
+                </h3>
+
+                <div class="place">
+                    ⌖ ${escapeHtml(h.area)}
+                </div>
+
+                <div class="price">
+                    ${money(h.price)}
+                    <small>total*</small>
+                </div>
+
+                <div class="tags">
+
+                    <span>
+                        👥 ${h.people} personas
+                    </span>
+
+                    <span>
+                        ▤ ${h.rooms} hab.
+                    </span>
+
+                </div>
+
+            </div>
+
+        `;
 
 
-let arr = houses.filter(h => {
+        el.addEventListener(
+            "click",
+            () => {
 
-    const q =
-        document
-            .getElementById("search")
-            .value
-            .trim()
-            .toLowerCase();
+                map.flyTo(
+                    [h.lat, h.lng],
+                    10,
+                    {
+                        duration: 0.5
+                    }
+                );
 
+                selectHouse(h.id);
 
-    const min =
-        Number(
-            document
-                .getElementById("people")
-                .value
+            }
         );
 
 
-    return (
+        list.appendChild(el);
 
-        (!q ||
-            (h.name + " " + h.area)
-                .toLowerCase()
-                .includes(q)
-        )
-
-        &&
-
-        h.people >= min
-
-    );
-
-});
+    });
 
 
-const sort =
-    document
-        .getElementById("sort")
-        .value;
+    /* Mostrar / ocultar marcadores */
 
+    markers.forEach((marker, id) => {
 
-if(sort === "priceAsc"){
+        if (
+            arr.some(h => h.id === id)
+        ) {
 
-    arr.sort(
-        (a,b) => a.price - b.price
-    );
+            if (!map.hasLayer(marker)) {
+                marker.addTo(map);
+            }
+
+        } else {
+
+            if (map.hasLayer(marker)) {
+                map.removeLayer(marker);
+            }
+
+        }
+
+    });
 
 }
 
-
-if(sort === "priceDesc"){
-
-    arr.sort(
-        (a,b) => b.price - a.price
-    );
-
-}
-
-
-return arr;
-
-
-}
 
 /* =========================
-LISTADO
+   SELECCIONAR CASA
 ========================= */
 
-function renderList(){
+function selectHouse(id) {
+
+    const house =
+        houses.find(h => h.id === id);
 
 
-const arr = visibleHouses();
+    if (!house) {
+        return;
+    }
 
 
-document.getElementById("count").textContent =
-    `${arr.length} alojamiento${arr.length === 1 ? "" : "s"}`;
+    selectedId = id;
+
+    currentPhoto = 0;
 
 
-document.getElementById("subtitle").textContent =
-    `${houses.length} alojamientos · precios orientativos`;
+    const detail =
+        document.getElementById("detail");
 
 
-const list =
-    document.getElementById("list");
+    /* =========================
+       FOTOS
+    ========================= */
+
+    let photos = [];
+
+    if (
+        house.photos &&
+        house.photos.length
+    ) {
+
+        photos = house.photos;
+
+    } else if (house.image) {
+
+        photos = [house.image];
+
+    }
 
 
-list.innerHTML = "";
+    /* =========================
+       CARACTERÍSTICAS
+    ========================= */
+
+    let featuresHTML = "";
 
 
-if(!arr.length){
+    if (
+        house.features &&
+        house.features.length
+    ) {
 
-    list.innerHTML =
-        `<div class="empty">
-            No hay alojamientos que coincidan con la búsqueda.
-        </div>`;
+        featuresHTML = `
 
-    return;
+            <div class="detail-section">
 
-}
+                <h4>
+                    Características
+                </h4>
 
+                <div class="detail-features">
 
-arr.forEach(h => {
+                    ${house.features.map(feature => `
 
-    const el =
-        document.createElement("article");
+                        <span>
+                            ${escapeHtml(feature)}
+                        </span>
 
+                    `).join("")}
 
-    el.className = "house";
+                </div>
 
-
-    el.innerHTML = `
-
-        <img
-            src="${escapeHtml(h.image)}"
-            alt=""
-            loading="lazy"
-        >
-
-        <div>
-
-            <h3>
-                ${escapeHtml(h.name)}
-            </h3>
-
-            <div class="place">
-                ⌖ ${escapeHtml(h.area)}
             </div>
 
-            <div class="price">
-                ${money(h.price)}
-                <small>total*</small>
+        `;
+
+    }
+
+
+    /* =========================
+       DESCRIPCIÓN
+    ========================= */
+
+    let descriptionHTML = "";
+
+
+    if (house.description) {
+
+        descriptionHTML = `
+
+            <div class="detail-section">
+
+                <h4>
+                    Descripción
+                </h4>
+
+                <p>
+                    ${escapeHtml(house.description)}
+                </p>
+
             </div>
 
-            <div class="tags">
+        `;
+
+    }
+
+
+    /* =========================
+       GOOGLE MAPS
+    ========================= */
+
+    const mapsUrl =
+        `https://www.google.com/maps/dir/?api=1&destination=${house.lat},${house.lng}`;
+
+
+    /* =========================
+       CARRUSEL
+    ========================= */
+
+    let carouselHTML = "";
+
+
+    if (photos.length) {
+
+        carouselHTML = `
+
+            <div class="detail-carousel">
+
+                <img
+                    id="detail-photo"
+                    class="detail-image"
+                    src="${escapeHtml(photos[0])}"
+                    alt="${escapeHtml(house.name)}"
+                >
+
+
+                ${
+                    photos.length > 1
+                    ?
+                    `
+
+                    <button
+                        class="carousel-prev"
+                        type="button"
+                        onclick="previousPhoto()"
+                        aria-label="Foto anterior">
+
+                        ‹
+
+                    </button>
+
+
+                    <button
+                        class="carousel-next"
+                        type="button"
+                        onclick="nextPhoto()"
+                        aria-label="Foto siguiente">
+
+                        ›
+
+                    </button>
+
+
+                    <div
+                        id="photo-counter"
+                        class="photo-counter">
+
+                        1 / ${photos.length}
+
+                    </div>
+
+                    `
+                    :
+                    ""
+                }
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =========================
+       CONTENIDO
+    ========================= */
+
+    detail.innerHTML = `
+
+        <button
+            class="detail-close"
+            type="button"
+            aria-label="Cerrar"
+            onclick="closeDetail()">
+
+            ×
+
+        </button>
+
+
+        ${carouselHTML}
+
+
+        <div class="detail-content">
+
+            <div class="detail-location">
+                ${escapeHtml(house.area)}
+            </div>
+
+
+            <h2>
+                ${escapeHtml(house.name)}
+            </h2>
+
+
+            <div class="detail-price">
+
+                ${money(house.price)}
 
                 <span>
-                    👥 ${h.people} personas
+                    total*
                 </span>
 
-                <span>
-                    ▤ ${h.rooms} hab.
-                </span>
+            </div>
+
+
+            <div class="detail-stats">
+
+                <div>
+
+                    <strong>
+                        👥
+                    </strong>
+
+                    <span>
+                        ${house.people}
+                    </span>
+
+                    <small>
+                        personas
+                    </small>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        ▤
+                    </strong>
+
+                    <span>
+                        ${house.rooms}
+                    </span>
+
+                    <small>
+                        habitaciones
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            ${descriptionHTML}
+
+
+            ${featuresHTML}
+
+
+            <div class="detail-actions">
+
+                <a
+                    href="${mapsUrl}"
+                    target="_blank"
+                    rel="noopener"
+                    class="detail-button">
+
+                    Cómo llegar ↗
+
+                </a>
+
+
+                ${
+                    house.bookingUrl
+                    ?
+                    `
+
+                    <a
+                        href="${escapeHtml(house.bookingUrl)}"
+                        target="_blank"
+                        rel="noopener"
+                        class="detail-button primary">
+
+                        Reservar ↗
+
+                    </a>
+
+                    `
+                    :
+                    ""
+                }
+
+            </div>
+
+
+            <div class="detail-note">
+
+                * Precio orientativo. Comprueba disponibilidad
+                y condiciones directamente con el alojamiento.
 
             </div>
 
@@ -274,106 +643,208 @@ arr.forEach(h => {
     `;
 
 
-    el.addEventListener(
-        "click",
-        () => {
-
-            map.flyTo(
-                [h.lat, h.lng],
-                10,
-                {duration:.5}
-            );
-
-            markers
-                .get(h.id)
-                .openPopup();
-
-        }
-    );
+    detail.classList.add("active");
 
 
-    list.appendChild(el);
+    /* Abrir popup */
 
-});
+    const marker =
+        markers.get(id);
 
 
-/* Mostrar/ocultar marcadores */
+    if (marker) {
+        marker.openPopup();
+    }
 
-markers.forEach((marker,id) => {
+}
 
-    if(
-        arr.some(h => h.id === id)
-    ){
 
-        if(!map.hasLayer(marker)){
-            marker.addTo(map);
-        }
+/* =========================
+   SIGUIENTE FOTO
+========================= */
 
-    }else{
+function nextPhoto() {
 
-        if(map.hasLayer(marker)){
-            map.removeLayer(marker);
-        }
+    const house =
+        houses.find(h => h.id === selectedId);
+
+
+    if (
+        !house ||
+        !house.photos ||
+        house.photos.length <= 1
+    ) {
+        return;
+    }
+
+
+    currentPhoto++;
+
+
+    if (
+        currentPhoto >= house.photos.length
+    ) {
+
+        currentPhoto = 0;
 
     }
 
-});
 
-
-}
-
-/* =========================
-SEGURIDAD HTML
-========================= */
-
-function escapeHtml(s){
-
-
-return String(s).replace(
-    /[&<>"']/g,
-
-    c => ({
-
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#39;"
-
-    }[c])
-
-);
-
+    updatePhoto();
 
 }
 
+
 /* =========================
-EVENTOS
+   FOTO ANTERIOR
+========================= */
+
+function previousPhoto() {
+
+    const house =
+        houses.find(h => h.id === selectedId);
+
+
+    if (
+        !house ||
+        !house.photos ||
+        house.photos.length <= 1
+    ) {
+        return;
+    }
+
+
+    currentPhoto--;
+
+
+    if (currentPhoto < 0) {
+
+        currentPhoto =
+            house.photos.length - 1;
+
+    }
+
+
+    updatePhoto();
+
+}
+
+
+/* =========================
+   ACTUALIZAR FOTO
+========================= */
+
+function updatePhoto() {
+
+    const house =
+        houses.find(h => h.id === selectedId);
+
+
+    if (!house || !house.photos) {
+        return;
+    }
+
+
+    const photo =
+        document.getElementById("detail-photo");
+
+
+    const counter =
+        document.getElementById("photo-counter");
+
+
+    if (photo) {
+
+        photo.src =
+            house.photos[currentPhoto];
+
+    }
+
+
+    if (counter) {
+
+        counter.textContent =
+            `${currentPhoto + 1} / ${house.photos.length}`;
+
+    }
+
+}
+
+
+/* =========================
+   CERRAR DETALLE
+========================= */
+
+function closeDetail() {
+
+    const detail =
+        document.getElementById("detail");
+
+
+    detail.classList.remove("active");
+
+
+    selectedId = null;
+
+    currentPhoto = 0;
+
+}
+
+
+/* =========================
+   SEGURIDAD HTML
+========================= */
+
+function escapeHtml(s) {
+
+    return String(s).replace(
+        /[&<>"']/g,
+
+        c => ({
+
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+
+        }[c])
+
+    );
+
+}
+
+
+/* =========================
+   EVENTOS
 ========================= */
 
 document
-.getElementById("search")
-.addEventListener(
-"input",
-renderList
-);
+    .getElementById("search")
+    .addEventListener(
+        "input",
+        renderList
+    );
+
 
 document
-.getElementById("people")
-.addEventListener(
-"change",
-renderList
-);
+    .getElementById("people")
+    .addEventListener(
+        "change",
+        renderList
+    );
+
 
 document
-.getElementById("sort")
-.addEventListener(
-"change",
-renderList
-);
+    .getElementById("sort")
+    .addEventListener(
+        "change",
+        renderList
+    );
+
 
 /* =========================
-INICIO
+   INICIO
 ========================= */
 
 renderList();

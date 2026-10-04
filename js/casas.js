@@ -11,15 +11,16 @@ const houses = [
         lat: 43.354,
         lng: -2.78,
 
-        image: "casas/astorki-goikoa/fotos/1.jpg",
-        page: "casas/astorki-goikoa/index.html",
+        image: "casas/astorki-goikoa/1.jpg",
 
         description: "Alojamiento rural para disfrutar de una escapada en grupo. Añade aquí la descripción, equipamiento y condiciones.",
 
         features: [
             "Jardín",
             "Cocina equipada"
-        ]
+        ],
+
+        bookingUrl: ""
     },
 
 
@@ -34,15 +35,21 @@ const houses = [
         lat: 43.302,
         lng: -1.79,
 
-        image: "casas/erreteneko-borda/fotos/1.jpg",
-        page: "casas/erreteneko-borda/index.html",
+        image: "casas/erreteneko-borda/1.jpg",
+
+        photos: Array.from(
+            { length: 23 },
+            (_, i) => `casas/erreteneko-borda/${i + 1}.jpg`
+        ),
 
         description: "Casa rural rodeada de naturaleza. Sustituye este texto por los datos reales del alojamiento.",
 
         features: [
             "Terraza",
             "Barbacoa"
-        ]
+        ],
+
+        bookingUrl: ""
     },
 
 
@@ -57,15 +64,21 @@ const houses = [
         lat: 43.235,
         lng: -1.57,
 
-        image: "casas/zimitxu/fotos/1.jpg",
-        page: "casas/zimitxu/index.html",
+        image: "casas/zimitxu/1.jpg",
+
+        photos: Array.from(
+            { length: 23 },
+            (_, i) => `casas/zimitxu/${i + 1}.jpg`
+        ),
 
         description: "Descripción del alojamiento, ubicación, normas y cualquier información útil para el grupo.",
 
         features: [
             "Jardín",
             "Parking"
-        ]
+        ],
+
+        bookingUrl: ""
     },
 
 
