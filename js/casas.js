@@ -8,8 +8,9 @@ const houses = [
         people: 10,
         rooms: 5,
 
-        lat: 43.354,
-        lng: -2.78,
+        // Coordenadas publicadas del alojamiento
+        lat: 43.27337,
+        lng: -2.60625,
 
         image: "casas/astorki-goikoa/1.jpg",
 
@@ -20,16 +21,11 @@ const houses = [
 
         description: "Alojamiento rural para disfrutar de una escapada en grupo. Añade aquí la descripción, equipamiento y condiciones.",
 
-        features: [
-            "Jardín",
-            "Cocina equipada"
-        ],
+        features: ["Jardín", "Cocina equipada"],
 
         mapsUrl: "https://maps.app.goo.gl/rXNCunCTE8rgQzXi9",
-
         bookingUrl: "https://www.booking.com/Share-6I7jML"
     },
-
 
     {
         id: 2,
@@ -39,8 +35,9 @@ const houses = [
         people: 10,
         rooms: 5,
 
-        lat: 43.302,
-        lng: -1.79,
+        // Coordenadas publicadas por el alojamiento
+        lat: 43.30903,
+        lng: -1.69309,
 
         image: "casas/erreteneko-borda/1.jpg",
 
@@ -51,16 +48,11 @@ const houses = [
 
         description: "Casa rural rodeada de naturaleza. Sustituye este texto por los datos reales del alojamiento.",
 
-        features: [
-            "Terraza",
-            "Barbacoa"
-        ],
+        features: ["Terraza", "Barbacoa"],
 
         mapsUrl: "https://maps.app.goo.gl/skTs6RapQtzYWHAv8",
-
         bookingUrl: "https://www.booking.com/Share-tRCHDko"
     },
-
 
     {
         id: 3,
@@ -70,8 +62,9 @@ const houses = [
         people: 12,
         rooms: 6,
 
-        lat: 43.235,
-        lng: -1.57,
+        // Coordenadas GPS publicadas
+        lat: 43.231509,
+        lng: -1.5804434,
 
         image: "casas/zimitxu/1.jpg",
 
@@ -82,16 +75,11 @@ const houses = [
 
         description: "Descripción del alojamiento, ubicación, normas y cualquier información útil para el grupo.",
 
-        features: [
-            "Jardín",
-            "Parking"
-        ],
+        features: ["Jardín", "Parking"],
 
         mapsUrl: "https://maps.app.goo.gl/qsy6VkgKHUYCX7uE7",
-
         bookingUrl: "https://www.booking.com/Share-WQKCwH8"
     },
-
 
     {
         id: 4,
@@ -101,8 +89,10 @@ const houses = [
         people: 10,
         rooms: 5,
 
-        lat: 43.205,
-        lng: -1.82,
+        // Coordenadas publicadas para Garzibaita, en Sunbilla.
+        // Comprueba que sea el mismo alojamiento que tu enlace.
+        lat: 43.16500,
+        lng: -1.67044,
 
         image: "casas/garbizaita/1.jpg",
 
@@ -113,16 +103,11 @@ const houses = [
 
         description: "Añade aquí los detalles de la casa y lo que incluye el precio.",
 
-        features: [
-            "Cocina equipada",
-            "Wi-Fi"
-        ],
+        features: ["Cocina equipada", "Wi-Fi"],
 
         mapsUrl: "https://maps.app.goo.gl/PzkFoHwtEV1gpeki6",
-
         bookingUrl: "https://www.booking.com/Share-A8WuEq"
     },
-
 
     {
         id: 5,
@@ -132,7 +117,10 @@ const houses = [
         people: 12,
         rooms: 6,
 
-        lat: 43.084021, 
+        // Coordenadas pendientes de verificar con el enlace de Maps.
+        // La casa publicada como Arriaran Landetxea está en Gorriztaran,
+        // Leiza (Navarra); comprueba que sea exactamente esta propiedad.
+        lat: 43.084021,
         lng: -1.888885,
 
         image: "casas/arriaran/1.jpg",
@@ -144,16 +132,11 @@ const houses = [
 
         description: "Alojamiento para grupos. Completa esta ficha con la información confirmada.",
 
-        features: [
-            "Vistas",
-            "Jardín"
-        ],
+        features: ["Vistas", "Jardín"],
 
         mapsUrl: "https://maps.app.goo.gl/DzKfSaFZN8KoHnjr6",
-
         bookingUrl: "https://www.booking.com/Share-pvqq14"
     },
-
 
     {
         id: 6,
@@ -163,8 +146,10 @@ const houses = [
         people: 10,
         rooms: 5,
 
-        lat: 42.91,
-        lng: -2.02,
+        // Coordenadas publicadas de Erburu I, en Urdiain.
+        // Verifica que el enlace corresponda a la casa grande que alquilas.
+        lat: 42.886263,
+        lng: -2.136669,
 
         image: "casas/erburu/1.jpg",
 
@@ -175,16 +160,11 @@ const houses = [
 
         description: "Información sobre capacidad, habitaciones, servicios y condiciones de reserva.",
 
-        features: [
-            "Barbacoa",
-            "Parking"
-        ],
+        features: ["Barbacoa", "Parking"],
 
         mapsUrl: "https://maps.app.goo.gl/b4cYjnXWaMFBfUnW6",
-
         bookingUrl: "https://www.booking.com/Share-K5NLs6T"
     },
-
 
     {
         id: 7,
@@ -194,8 +174,10 @@ const houses = [
         people: 10,
         rooms: 5,
 
-        lat: 42.70,
-        lng: -1.95,
+        // Coordenadas publicadas de Casa Nabarro, en Iturgoyen.
+        // Confirma que el enlace de Maps corresponda a Nabarro I.
+        lat: 42.7756,
+        lng: -1.95449,
 
         image: "casas/nabarro-i/1.jpg",
 
@@ -206,16 +188,11 @@ const houses = [
 
         description: "Incluye aquí los detalles que os ayuden a comparar las opciones.",
 
-        features: [
-            "Jardín",
-            "Terraza"
-        ],
+        features: ["Jardín", "Terraza"],
 
         mapsUrl: "https://maps.app.goo.gl/CoNgLFCyPXkceUCo7",
-
         bookingUrl: "https://www.booking.com/Share-UAnY3W"
     },
-
 
     {
         id: 8,
@@ -225,8 +202,10 @@ const houses = [
         people: 12,
         rooms: 6,
 
-        lat: 42.61,
-        lng: -1.78,
+        // Coordenadas aproximadas de Mendigorría.
+        // Pendiente de comprobar el punto exacto de la casa.
+        lat: 42.628,
+        lng: -1.834,
 
         image: "casas/izargi/1.jpg",
 
@@ -237,16 +216,11 @@ const houses = [
 
         description: "Añade información real del alojamiento, política de cancelación y precio final.",
 
-        features: [
-            "Cocina equipada",
-            "Barbacoa"
-        ],
+        features: ["Cocina equipada", "Barbacoa"],
 
         mapsUrl: "https://maps.app.goo.gl/mq5t6R36Ds2odNqx9",
-
         bookingUrl: "https://www.booking.com/Share-tDiQPU"
     },
-
 
     {
         id: 9,
@@ -256,6 +230,7 @@ const houses = [
         people: 10,
         rooms: 5,
 
+        // Coordenadas originales: pendiente de verificación.
         lat: 42.72,
         lng: -3.10,
 
@@ -268,16 +243,11 @@ const houses = [
 
         description: "Casa rural para grupos, con espacio común y entorno natural. Edita esta descripción.",
 
-        features: [
-            "Jardín",
-            "Parking"
-        ],
+        features: ["Jardín", "Parking"],
 
         mapsUrl: "https://maps.app.goo.gl/HrHq7EW3pbBBjww68",
-
         bookingUrl: "https://www.booking.com/Share-mjnskwz"
     },
-
 
     {
         id: 10,
@@ -287,6 +257,7 @@ const houses = [
         people: 10,
         rooms: 5,
 
+        // Coordenadas originales aproximadas; falta comprobar la dirección.
         lat: 42.56,
         lng: -2.85,
 
@@ -299,16 +270,11 @@ const houses = [
 
         description: "Añade los servicios incluidos, la distancia y las condiciones relevantes.",
 
-        features: [
-            "Terraza",
-            "Cocina equipada"
-        ],
+        features: ["Terraza", "Cocina equipada"],
 
         mapsUrl: "https://maps.app.goo.gl/yHNvyWFSrdWktgkS7",
-
         bookingUrl: "https://www.booking.com/Share-O6obdF"
     },
-
 
     {
         id: 11,
@@ -318,6 +284,7 @@ const houses = [
         people: 8,
         rooms: 4,
 
+        // Coordenadas originales aproximadas; pendiente de verificación.
         lat: 42.74,
         lng: -3.41,
 
@@ -330,16 +297,11 @@ const houses = [
 
         description: "Completa esta ficha con los datos de la casa y el enlace donde se puede reservar.",
 
-        features: [
-            "Entorno rural",
-            "Cocina"
-        ],
+        features: ["Entorno rural", "Cocina"],
 
         mapsUrl: "https://maps.app.goo.gl/YYTxvJod2kffpt8T7",
-
         bookingUrl: "https://www.booking.com/Share-2HXV7Y0"
     },
-
 
     {
         id: 12,
@@ -349,8 +311,9 @@ const houses = [
         people: 12,
         rooms: 6,
 
-        lat: 42.78,
-        lng: -1.55,
+        // Coordenadas GPS publicadas por el alojamiento
+        lat: 42.87099,
+        lng: -1.47078,
 
         image: "casas/enarakabi/1.jpg",
 
@@ -361,16 +324,11 @@ const houses = [
 
         description: "Indica aquí las condiciones, servicios, capacidad y precio total.",
 
-        features: [
-            "Jardín",
-            "Barbacoa"
-        ],
+        features: ["Jardín", "Barbacoa"],
 
         mapsUrl: "https://maps.app.goo.gl/P8ZFS5agiHNqVJLV9",
-
         bookingUrl: "https://www.booking.com/Share-Mh4x5w"
     },
-
 
     {
         id: 13,
@@ -380,29 +338,25 @@ const houses = [
         people: 12,
         rooms: 6,
 
-        lat: 0,
-        lng: 0,
+        // Aproximación a la zona de Lizaso.
+        // Debe sustituirse por el punto exacto de mapsUrl.
+        lat: 42.968,
+        lng: -1.686,
 
         image: "casas/valle-ulzama/1.jpg",
 
         photos: Array.from(
             { length: 16 },
-            (_, i) => `casas/astorki-goikoa/${i + 1}.jpg`
+            (_, i) => `casas/valle-ulzama/${i + 1}.jpg`
         ),
 
         description: "Alojamiento rural para disfrutar de una escapada en grupo. Añade aquí la descripción, equipamiento y condiciones.",
 
-        features: [
-            "Jardín",
-            "Cocina equipada",
-            "Piscina"
-        ],
+        features: ["Jardín", "Cocina equipada", "Piscina"],
 
         mapsUrl: "https://maps.app.goo.gl/41Rom2G6uEFVmRLo8",
-
         bookingUrl: "https://www.booking.com/Share-nwCbZD"
     },
-
 
     {
         id: 14,
@@ -412,56 +366,52 @@ const houses = [
         people: 12,
         rooms: 4,
 
-        lat: 0,
-        lng: 0,
+        // Coordenadas publicadas para Arotzenia, en Lizaso.
+        lat: 42.968067,
+        lng: -1.685802,
 
         image: "casas/arotzenia/1.jpg",
 
         photos: Array.from(
             { length: 18 },
-            (_, i) => `casas/astorki-goikoa/${i + 1}.jpg`
+            (_, i) => `casas/arotzenia/${i + 1}.jpg`
         ),
 
         description: "Alojamiento rural para disfrutar de una escapada en grupo. Añade aquí la descripción, equipamiento y condiciones.",
 
-        features: [
-            "Jardín",
-            "Cocina equipada",
-            "Piscina"
-        ],
+        features: ["Jardín", "Cocina equipada", "Piscina"],
 
         mapsUrl: "https://maps.app.goo.gl/7QAuaa2QNC19VuqH9",
-
         bookingUrl: "https://www.booking.com/Share-29F18v"
     },
 
-
     {
-        id: 14,
+        id: 15,
         name: "Casa Rural Balentzenea",
         area: "Gipuzkoa · zona de Irun",
         price: 630,
         people: 10,
         rooms: 4,
 
-        lat: 0,
-        lng: 0,
+        // Coordenadas pendientes de verificación.
+        // No se utiliza 0,0 para evitar colocar el marcador en África.
+        // Sustituye por las coordenadas exactas de mapsUrl.
+        lat: 43.339,
+        lng: -1.789,
 
         image: "casas/balentzenea/1.jpg",
 
         photos: Array.from(
             { length: 20 },
-            (_, i) => `casas/astorki-goikoa/${i + 1}.jpg`
+            (_, i) => `casas/balentzenea/${i + 1}.jpg`
         ),
 
         description: "Alojamiento rural para disfrutar de una escapada en grupo. Añade aquí la descripción, equipamiento y condiciones.",
 
-        features: [
-            "Cocina equipada"
-        ],
+        features: ["Cocina equipada"],
 
         mapsUrl: "https://maps.app.goo.gl/e5KCJujtWTNWqFZdA",
-
         bookingUrl: "https://www.booking.com/Share-ObYrTb"
-    },
+    }
+
 ];
