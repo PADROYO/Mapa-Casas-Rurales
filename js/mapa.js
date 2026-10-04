@@ -9,24 +9,43 @@ maximumFractionDigits: 0
 MAPA
 ========================= */
 
-const map = L.map("map", {
-scrollWheelZoom: true
-}).setView([42.95, -2.15], 8);
+const map = L.map('map');
 
 L.tileLayer(
-"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-{
-maxZoom: 19,
-
-
-    attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}
-
-
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+    }
 ).addTo(map);
 
 const markers = new Map();
+let selectedId = null;
+
+houses.forEach(h => {
+
+    const marker = L.marker(
+        [h.lat, h.lng],
+        {
+            icon: markerIcon(h.price)
+        }
+    ).addTo(map);
+
+    marker.on('click', () => {
+        window.location.href = h.page;
+    });
+
+    markers.set(h.id, marker);
+});
+
+// Centrar el mapa automáticamente en todas las casas
+const bounds = L.latLngBounds(
+    houses.map(h => [h.lat, h.lng])
+);
+
+map.fitBounds(bounds, {
+    padding: [50, 50]
+});
 
 /* =========================
 ICONO DEL PRECIO
