@@ -229,12 +229,6 @@ function renderList() {
         el.className = "house";
 
 
-        /*
-         * image = imagen principal de la tarjeta
-         *
-         * NO usamos photos aquí.
-         */
-
         el.innerHTML = `
 
             <img
@@ -325,19 +319,10 @@ function renderList() {
 
 
 /* =========================
-   OBTENER FOTOS DE UNA CASA
+   OBTENER FOTOS
 ========================= */
 
 function getHousePhotos(house) {
-
-    /*
-     * photos = fotos del carrusel
-     *
-     * Si existe photos y tiene contenido,
-     * usamos todas esas fotos.
-     *
-     * Si no existe, usamos image.
-     */
 
     if (
         Array.isArray(house.photos) &&
@@ -385,28 +370,18 @@ function selectHouse(id) {
 
 
     if (!detail) {
-        console.error("No existe el elemento #detail en index.html");
+
+        console.error(
+            "No existe el elemento #detail en index.html"
+        );
+
         return;
+
     }
 
 
-    /* =========================
-       FOTOS
-    ========================= */
-
     const photos =
         getHousePhotos(house);
-
-
-    console.log(
-        "Casa seleccionada:",
-        house.name
-    );
-
-    console.log(
-        "Fotos:",
-        photos
-    );
 
 
     /* =========================
@@ -423,7 +398,7 @@ function selectHouse(id) {
 
         featuresHTML = `
 
-            <div class="detail-section">
+            <section class="detail-section">
 
                 <h4>
                     Características
@@ -441,7 +416,7 @@ function selectHouse(id) {
 
                 </div>
 
-            </div>
+            </section>
 
         `;
 
@@ -459,17 +434,17 @@ function selectHouse(id) {
 
         descriptionHTML = `
 
-            <div class="detail-section">
+            <section class="detail-section">
 
                 <h4>
-                    Descripción
+                    Sobre el alojamiento
                 </h4>
 
                 <p>
                     ${escapeHtml(house.description)}
                 </p>
 
-            </div>
+            </section>
 
         `;
 
@@ -497,13 +472,21 @@ function selectHouse(id) {
 
             <div class="detail-carousel">
 
-                <img
-                    id="detail-photo"
-                    class="detail-image"
-                    src="${escapeHtml(photos[0])}"
-                    alt="${escapeHtml(house.name)}"
-                    onerror="this.onerror=null; this.src='${escapeHtml(house.image || "")}'"
-                >
+                <div class="detail-image-frame">
+
+                    <img
+                        id="detail-photo"
+                        class="detail-image"
+                        src="${escapeHtml(photos[0])}"
+                        alt="${escapeHtml(house.name)}"
+                        onerror="
+                            this.onerror=null;
+                            this.src='${escapeHtml(house.image || "")}'
+                        "
+                    >
+
+                </div>
+
 
                 ${
                     photos.length > 1
@@ -588,8 +571,9 @@ function selectHouse(id) {
 
         <div class="detail-content">
 
+
             <div class="detail-location">
-                ${escapeHtml(house.area)}
+                ⌖ ${escapeHtml(house.area)}
             </div>
 
 
@@ -611,36 +595,44 @@ function selectHouse(id) {
 
             <div class="detail-stats">
 
-                <div>
+                <div class="detail-stat">
 
-                    <strong>
+                    <span class="detail-stat-icon">
                         👥
-                    </strong>
-
-                    <span>
-                        ${house.people}
                     </span>
 
-                    <small>
-                        personas
-                    </small>
+                    <div>
+
+                        <strong>
+                            ${house.people}
+                        </strong>
+
+                        <small>
+                            personas
+                        </small>
+
+                    </div>
 
                 </div>
 
 
-                <div>
+                <div class="detail-stat">
 
-                    <strong>
+                    <span class="detail-stat-icon">
                         ▤
-                    </strong>
-
-                    <span>
-                        ${house.rooms}
                     </span>
 
-                    <small>
-                        habitaciones
-                    </small>
+                    <div>
+
+                        <strong>
+                            ${house.rooms}
+                        </strong>
+
+                        <small>
+                            habitaciones
+                        </small>
+
+                    </div>
 
                 </div>
 
@@ -701,20 +693,11 @@ function selectHouse(id) {
     `;
 
 
-    /*
-     * IMPORTANTE:
-     * Activamos el panel después de insertar todo
-     * su contenido.
-     */
+    /* =========================
+       MOSTRAR FICHA
+    ========================= */
 
     detail.classList.add("active");
-
-
-    /*
-     * Forzamos que el panel sea visible.
-     * Esto evita problemas si el CSS actual
-     * tiene alguna regla que lo mantiene oculto.
-     */
 
     detail.style.display = "block";
 
@@ -762,9 +745,7 @@ function nextPhoto() {
 
 
     if (currentPhoto >= photos.length) {
-
         currentPhoto = 0;
-
     }
 
 
@@ -801,10 +782,7 @@ function previousPhoto() {
 
 
     if (currentPhoto < 0) {
-
-        currentPhoto =
-            photos.length - 1;
-
+        currentPhoto = photos.length - 1;
     }
 
 
@@ -850,6 +828,9 @@ function updatePhoto() {
         photo.src =
             photos[currentPhoto];
 
+        photo.alt =
+            `${house.name} · Foto ${currentPhoto + 1}`;
+
     }
 
 
@@ -880,9 +861,7 @@ function closeDetail() {
 
     detail.classList.remove("active");
 
-
     detail.style.display = "none";
-
 
     selectedId = null;
 
