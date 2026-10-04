@@ -311,7 +311,7 @@
                 <img
                     id="gallery-image"
                     src="fotos/1.jpg"
-                    alt="Casa Rural Astorki Goikoa"
+                    alt="Casa Rural Arriaran"
                 >
 
                 <button
@@ -345,16 +345,16 @@
             <div class="house-content">
 
                 <h1 class="house-title">
-                    Casa Rural Astorki Goikoa
+                    Casa Rural Arriaran
                 </h1>
 
                 <div class="house-location">
-                    📍 Bizkaia · zona de Mungia
+                    📍 Gipuzkoa · interior
                 </div>
 
 
                 <div class="house-price">
-                    440 €
+                    800 €
                     <span>precio total orientativo</span>
                 </div>
 
@@ -363,36 +363,30 @@
 
                     <div class="house-stat">
                         <strong>👥 Capacidad</strong>
-                        10 personas
+                        12 personas
                     </div>
 
                     <div class="house-stat">
                         <strong>🛏 Habitaciones</strong>
-                        5 habitaciones
+                        6 habitaciones
                     </div>
 
                 </div>
 
-
                 <div class="house-features">
+
+                    <span class="house-feature">
+                        Vistas
+                    </span>
 
                     <span class="house-feature">
                         Jardín
                     </span>
 
-                    <span class="house-feature">
-                        Cocina equipada
-                    </span>
-
                 </div>
 
-
                 <p class="house-description">
-
-                    Alojamiento rural para disfrutar de una
-                    escapada en grupo. Añade aquí la descripción,
-                    equipamiento y condiciones.
-
+                    Alojamiento para grupos. Completa esta ficha con la información confirmada.
                 </p>
 
 
@@ -409,7 +403,7 @@
 
                     <a
                         class="house-button"
-                        href="https://www.google.com/maps/dir/?api=1&destination=43.354,-2.78"
+                        href="https://www.google.com/maps/dir/?api=1&destination=43.125,-2.03"
                         target="_blank"
                         rel="noopener"
                     >
@@ -429,12 +423,10 @@
 
 <script>
 
-    const photos = [
-        "fotos/1.jpg",
-        "fotos/2.jpg",
-        "fotos/3.jpg",
-        "fotos/4.jpg"
-    ];
+    const photos = Array.from(
+        { length: 23 },
+        (_, i) => `fotos/${i + 1}.jpg`
+    );
 
     let currentPhoto = 0;
 

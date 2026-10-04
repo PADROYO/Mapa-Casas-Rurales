@@ -1,280 +1,278 @@
 const houses = [
 
+    {
+        id: 1,
+        name: "Casa Rural Astorki Goikoa",
+        area: "Bizkaia · zona de Mungia",
+        price: 440,
+        people: 10,
+        rooms: 5,
 
-{
-    id: 1,
+        lat: 43.354,
+        lng: -2.78,
 
-    name: "Casa Rural Astorki Goikoa",
+        image: "casas/astorki-goikoa/fotos/1.jpg",
+        page: "casas/astorki-goikoa/index.html",
+
+        description: "Alojamiento rural para disfrutar de una escapada en grupo. Añade aquí la descripción, equipamiento y condiciones.",
 
-    area: "Bizkaia · zona de Mungia",
+        features: [
+            "Jardín",
+            "Cocina equipada"
+        ]
+    },
+
+
+    {
+        id: 2,
+        name: "Casa Rural Erreteneko Borda",
+        area: "Gipuzkoa · zona de Irun",
+        price: 580,
+        people: 10,
+        rooms: 5,
 
-    price: 440,
+        lat: 43.302,
+        lng: -1.79,
 
-    people: 10,
+        image: "casas/erreteneko-borda/fotos/1.jpg",
+        page: "casas/erreteneko-borda/index.html",
 
-    rooms: 5,
+        description: "Casa rural rodeada de naturaleza. Sustituye este texto por los datos reales del alojamiento.",
 
-    lat: 43.354,
+        features: [
+            "Terraza",
+            "Barbacoa"
+        ]
+    },
 
-    lng: -2.78,
+
+    {
+        id: 3,
+        name: "Casa Rural Zimitxu",
+        area: "Gipuzkoa · interior",
+        price: 900,
+        people: 12,
+        rooms: 6,
 
-    image: "fotos/astorki-goikoa/1.jpg",
+        lat: 43.235,
+        lng: -1.57,
 
-    page: "casas/astorki-goikoa.html"
-},
+        image: "casas/zimitxu/fotos/1.jpg",
+        page: "casas/zimitxu/index.html",
 
+        description: "Descripción del alojamiento, ubicación, normas y cualquier información útil para el grupo.",
 
-{
-    id: 2,
+        features: [
+            "Jardín",
+            "Parking"
+        ]
+    },
 
-    name: "Casa Rural Erreteneko Borda",
 
-    area: "Gipuzkoa · zona de Irun",
+    {
+        id: 4,
+        name: "Casa Rural Garbizaita",
+        area: "Gipuzkoa · zona de Oiartzun",
+        price: 630,
+        people: 10,
+        rooms: 5,
 
-    price: 580,
+        lat: 43.205,
+        lng: -1.82,
 
-    people: 10,
+        image: "casas/garbizaita/fotos/1.jpg",
+        page: "casas/garbizaita/index.html",
 
-    rooms: 5,
+        description: "Añade aquí los detalles de la casa y lo que incluye el precio.",
 
-    lat: 43.302,
+        features: [
+            "Cocina equipada",
+            "Wi-Fi"
+        ]
+    },
 
-    lng: -1.79,
 
-    image: "fotos/erreteneko-borda/1.jpg",
+    {
+        id: 5,
+        name: "Casa Rural Arriaran",
+        area: "Gipuzkoa · interior",
+        price: 800,
+        people: 12,
+        rooms: 6,
 
-    page: "casas/erreteneko-borda.html"
-},
+        lat: 43.125,
+        lng: -2.03,
 
+        image: "casas/arriaran/fotos/1.jpg",
+        page: "casas/arriaran/index.html",
 
-{
-    id: 3,
+        description: "Alojamiento para grupos. Completa esta ficha con la información confirmada.",
 
-    name: "Casa Rural Zimitxu",
+        features: [
+            "Vistas",
+            "Jardín"
+        ]
+    },
 
-    area: "Gipuzkoa · interior",
 
-    price: 900,
+    {
+        id: 6,
+        name: "Casa Rural Erburu",
+        area: "Navarra · zona de Sakana",
+        price: 720,
+        people: 10,
+        rooms: 5,
 
-    people: 12,
+        lat: 42.91,
+        lng: -2.02,
 
-    rooms: 6,
+        image: "casas/erburu/fotos/1.jpg",
+        page: "casas/erburu/index.html",
 
-    lat: 43.235,
+        description: "Información sobre capacidad, habitaciones, servicios y condiciones de reserva.",
 
-    lng: -1.57,
+        features: [
+            "Barbacoa",
+            "Parking"
+        ]
+    },
 
-    image: "fotos/zimitxu/1.jpg",
 
-    page: "casas/zimitxu.html"
-},
+    {
+        id: 7,
+        name: "Casa Rural Nabarro I",
+        area: "Navarra · zona de Estella",
+        price: 669,
+        people: 10,
+        rooms: 5,
 
+        lat: 42.70,
+        lng: -1.95,
 
-{
-    id: 4,
+        image: "casas/nabarro-i/fotos/1.jpg",
+        page: "casas/nabarro-i/index.html",
 
-    name: "Casa Rural Garbizaita",
+        description: "Incluye aquí los detalles que os ayuden a comparar las opciones.",
 
-    area: "Gipuzkoa · zona de Oiartzun",
+        features: [
+            "Jardín",
+            "Terraza"
+        ]
+    },
 
-    price: 630,
 
-    people: 10,
+    {
+        id: 8,
+        name: "Casa Rural IZARGI",
+        area: "Navarra · zona de Estella",
+        price: 850,
+        people: 12,
+        rooms: 6,
 
-    rooms: 5,
+        lat: 42.61,
+        lng: -1.78,
 
-    lat: 43.205,
+        image: "casas/izargi/fotos/1.jpg",
+        page: "casas/izargi/index.html",
 
-    lng: -1.82,
+        description: "Añade información real del alojamiento, política de cancelación y precio final.",
 
-    image: "fotos/garbizaita/1.jpg",
+        features: [
+            "Cocina equipada",
+            "Barbacoa"
+        ]
+    },
 
-    page: "casas/garbizaita.html"
-},
 
+    {
+        id: 9,
+        name: "Casa Landa",
+        area: "Álava · zona de Miranda",
+        price: 700,
+        people: 10,
+        rooms: 5,
 
-{
-    id: 5,
+        lat: 42.72,
+        lng: -3.10,
 
-    name: "Casa Rural Arriaran",
+        image: "casas/casa-landa/fotos/1.jpg",
+        page: "casas/casa-landa/index.html",
 
-    area: "Gipuzkoa · interior",
+        description: "Casa rural para grupos, con espacio común y entorno natural. Edita esta descripción.",
 
-    price: 800,
+        features: [
+            "Jardín",
+            "Parking"
+        ]
+    },
 
-    people: 12,
 
-    rooms: 6,
+    {
+        id: 10,
+        name: "La casa de las Tinas",
+        area: "La Rioja · zona de Haro",
+        price: 810,
+        people: 10,
+        rooms: 5,
 
-    lat: 43.125,
+        lat: 42.56,
+        lng: -2.85,
 
-    lng: -2.03,
+        image: "casas/casa-tinas/fotos/1.jpg",
+        page: "casas/casa-tinas/index.html",
 
-    image: "fotos/arriaran/1.jpg",
+        description: "Añade los servicios incluidos, la distancia y las condiciones relevantes.",
 
-    page: "casas/arriaran.html"
-},
+        features: [
+            "Terraza",
+            "Cocina equipada"
+        ]
+    },
 
 
-{
-    id: 6,
+    {
+        id: 11,
+        name: "Casa Rural Baratza",
+        area: "Burgos · zona de Oña",
+        price: 761,
+        people: 8,
+        rooms: 4,
 
-    name: "Casa Rural Erburu",
+        lat: 42.74,
+        lng: -3.41,
 
-    area: "Navarra · zona de Sakana",
+        image: "casas/baratza/fotos/1.jpg",
+        page: "casas/baratza/index.html",
 
-    price: 720,
+        description: "Completa esta ficha con los datos de la casa y el enlace donde se puede reservar.",
 
-    people: 10,
+        features: [
+            "Entorno rural",
+            "Cocina"
+        ]
+    },
 
-    rooms: 5,
 
-    lat: 42.91,
+    {
+        id: 12,
+        name: "Casa Rural Enarakabi",
+        area: "Navarra · zona de Pamplona",
+        price: 900,
+        people: 12,
+        rooms: 6,
 
-    lng: -2.02,
+        lat: 42.78,
+        lng: -1.55,
 
-    image: "fotos/erburu/1.jpg",
+        image: "casas/enarakabi/fotos/1.jpg",
+        page: "casas/enarakabi/index.html",
 
-    page: "casas/erburu.html"
-},
+        description: "Indica aquí las condiciones, servicios, capacidad y precio total.",
 
-
-{
-    id: 7,
-
-    name: "Casa Rural Nabarro I",
-
-    area: "Navarra · zona de Estella",
-
-    price: 669,
-
-    people: 10,
-
-    rooms: 5,
-
-    lat: 42.70,
-
-    lng: -1.95,
-
-    image: "fotos/nabarro-i/1.jpg",
-
-    page: "casas/nabarro-i.html"
-},
-
-
-{
-    id: 8,
-
-    name: "Casa Rural IZARGI",
-
-    area: "Navarra · zona de Estella",
-
-    price: 850,
-
-    people: 12,
-
-    rooms: 6,
-
-    lat: 42.61,
-
-    lng: -1.78,
-
-    image: "fotos/izargi/1.jpg",
-
-    page: "casas/izargi.html"
-},
-
-
-{
-    id: 9,
-
-    name: "Casa Landa",
-
-    area: "Álava · zona de Miranda",
-
-    price: 700,
-
-    people: 10,
-
-    rooms: 5,
-
-    lat: 42.72,
-
-    lng: -3.10,
-
-    image: "fotos/casa-landa/1.jpg",
-
-    page: "casas/casa-landa.html"
-},
-
-
-{
-    id: 10,
-
-    name: "La casa de las Tinas",
-
-    area: "La Rioja · zona de Haro",
-
-    price: 810,
-
-    people: 10,
-
-    rooms: 5,
-
-    lat: 42.56,
-
-    lng: -2.85,
-
-    image: "fotos/casa-tinas/1.jpg",
-
-    page: "casas/casa-tinas.html"
-},
-
-
-{
-    id: 11,
-
-    name: "Casa Rural Baratza",
-
-    area: "Burgos · zona de Oña",
-
-    price: 761,
-
-    people: 8,
-
-    rooms: 4,
-
-    lat: 42.74,
-
-    lng: -3.41,
-
-    image: "fotos/baratza/1.jpg",
-
-    page: "casas/baratza.html"
-},
-
-
-{
-    id: 12,
-
-    name: "Casa Rural Enarakabi",
-
-    area: "Navarra · zona de Pamplona",
-
-    price: 900,
-
-    people: 12,
-
-    rooms: 6,
-
-    lat: 42.78,
-
-    lng: -1.55,
-
-    image: "fotos/enarakabi/1.jpg",
-
-    page: "casas/enarakabi.html"
-}
-
+        features: [
+            "Jardín",
+            "Barbacoa"
+        ]
+    }
 
 ];
