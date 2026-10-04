@@ -141,18 +141,14 @@ function visibleHouses() {
 
 
         return (
-
             (
                 !q ||
                 (h.name + " " + h.area)
                     .toLowerCase()
                     .includes(q)
             )
-
             &&
-
             h.people >= min
-
         );
 
     });
@@ -233,12 +229,19 @@ function renderList() {
         el.className = "house";
 
 
+        /*
+         * image = imagen principal de la tarjeta
+         *
+         * NO usamos photos aquí.
+         */
+
         el.innerHTML = `
 
             <img
                 src="${escapeHtml(h.image)}"
                 alt="${escapeHtml(h.name)}"
                 loading="lazy"
+                onerror="this.style.display='none'"
             >
 
             <div>
@@ -296,13 +299,13 @@ function renderList() {
     });
 
 
-    /* Mostrar / ocultar marcadores */
+    /* =========================
+       MOSTRAR / OCULTAR MARCADORES
+    ========================= */
 
     markers.forEach((marker, id) => {
 
-        if (
-            arr.some(h => h.id === id)
-        ) {
+        if (arr.some(h => h.id === id)) {
 
             if (!map.hasLayer(marker)) {
                 marker.addTo(map);
@@ -317,6 +320,43 @@ function renderList() {
         }
 
     });
+
+}
+
+
+/* =========================
+   OBTENER FOTOS DE UNA CASA
+========================= */
+
+function getHousePhotos(house) {
+
+    /*
+     * photos = fotos del carrusel
+     *
+     * Si existe photos y tiene contenido,
+     * usamos todas esas fotos.
+     *
+     * Si no existe, usamos image.
+     */
+
+    if (
+        Array.isArray(house.photos) &&
+        house.photos.length > 0
+    ) {
+
+        return house.photos;
+
+    }
+
+
+    if (house.image) {
+
+        return [house.image];
+
+    }
+
+
+    return [];
 
 }
 
@@ -337,7 +377,6 @@ function selectHouse(id) {
 
 
     selectedId = id;
-
     currentPhoto = 0;
 
 
@@ -345,24 +384,29 @@ function selectHouse(id) {
         document.getElementById("detail");
 
 
+    if (!detail) {
+        console.error("No existe el elemento #detail en index.html");
+        return;
+    }
+
+
     /* =========================
        FOTOS
     ========================= */
 
-    let photos = [];
+    const photos =
+        getHousePhotos(house);
 
-    if (
-        house.photos &&
-        house.photos.length
-    ) {
 
-        photos = house.photos;
+    console.log(
+        "Casa seleccionada:",
+        house.name
+    );
 
-    } else if (house.image) {
-
-        photos = [house.image];
-
-    }
+    console.log(
+        "Fotos:",
+        photos
+    );
 
 
     /* =========================
@@ -373,7 +417,7 @@ function selectHouse(id) {
 
 
     if (
-        house.features &&
+        Array.isArray(house.features) &&
         house.features.length
     ) {
 
@@ -447,7 +491,7 @@ function selectHouse(id) {
     let carouselHTML = "";
 
 
-    if (photos.length) {
+    if (photos.length > 0) {
 
         carouselHTML = `
 
@@ -458,8 +502,8 @@ function selectHouse(id) {
                     class="detail-image"
                     src="${escapeHtml(photos[0])}"
                     alt="${escapeHtml(house.name)}"
+                    onerror="this.onerror=null; this.src='${escapeHtml(house.image || "")}'"
                 >
-
 
                 ${
                     photos.length > 1
@@ -500,6 +544,20 @@ function selectHouse(id) {
                     :
                     ""
                 }
+
+            </div>
+
+        `;
+
+    } else {
+
+        carouselHTML = `
+
+            <div class="detail-carousel no-photo">
+
+                <div class="no-photo-message">
+                    No hay fotografías disponibles
+                </div>
 
             </div>
 
@@ -643,10 +701,27 @@ function selectHouse(id) {
     `;
 
 
+    /*
+     * IMPORTANTE:
+     * Activamos el panel después de insertar todo
+     * su contenido.
+     */
+
     detail.classList.add("active");
 
 
-    /* Abrir popup */
+    /*
+     * Forzamos que el panel sea visible.
+     * Esto evita problemas si el CSS actual
+     * tiene alguna regla que lo mantiene oculto.
+     */
+
+    detail.style.display = "block";
+
+
+    /* =========================
+       ABRIR POPUP
+    ========================= */
 
     const marker =
         markers.get(id);
@@ -669,11 +744,16 @@ function nextPhoto() {
         houses.find(h => h.id === selectedId);
 
 
-    if (
-        !house ||
-        !house.photos ||
-        house.photos.length <= 1
-    ) {
+    if (!house) {
+        return;
+    }
+
+
+    const photos =
+        getHousePhotos(house);
+
+
+    if (photos.length <= 1) {
         return;
     }
 
@@ -681,9 +761,7 @@ function nextPhoto() {
     currentPhoto++;
 
 
-    if (
-        currentPhoto >= house.photos.length
-    ) {
+    if (currentPhoto >= photos.length) {
 
         currentPhoto = 0;
 
@@ -705,11 +783,16 @@ function previousPhoto() {
         houses.find(h => h.id === selectedId);
 
 
-    if (
-        !house ||
-        !house.photos ||
-        house.photos.length <= 1
-    ) {
+    if (!house) {
+        return;
+    }
+
+
+    const photos =
+        getHousePhotos(house);
+
+
+    if (photos.length <= 1) {
         return;
     }
 
@@ -720,7 +803,7 @@ function previousPhoto() {
     if (currentPhoto < 0) {
 
         currentPhoto =
-            house.photos.length - 1;
+            photos.length - 1;
 
     }
 
@@ -740,7 +823,16 @@ function updatePhoto() {
         houses.find(h => h.id === selectedId);
 
 
-    if (!house || !house.photos) {
+    if (!house) {
+        return;
+    }
+
+
+    const photos =
+        getHousePhotos(house);
+
+
+    if (!photos.length) {
         return;
     }
 
@@ -756,7 +848,7 @@ function updatePhoto() {
     if (photo) {
 
         photo.src =
-            house.photos[currentPhoto];
+            photos[currentPhoto];
 
     }
 
@@ -764,7 +856,7 @@ function updatePhoto() {
     if (counter) {
 
         counter.textContent =
-            `${currentPhoto + 1} / ${house.photos.length}`;
+            `${currentPhoto + 1} / ${photos.length}`;
 
     }
 
@@ -781,7 +873,15 @@ function closeDetail() {
         document.getElementById("detail");
 
 
+    if (!detail) {
+        return;
+    }
+
+
     detail.classList.remove("active");
+
+
+    detail.style.display = "none";
 
 
     selectedId = null;
