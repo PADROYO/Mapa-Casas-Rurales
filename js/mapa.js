@@ -52,13 +52,52 @@ function markerIcon(price) {
 
 
 /* =========================
+   VALIDAR COORDENADAS
+========================= */
+
+function validCoordinates(h) {
+
+    const lat = Number(h.lat);
+    const lng = Number(h.lng);
+
+    return (
+        Number.isFinite(lat) &&
+        Number.isFinite(lng) &&
+        lat >= 40 &&
+        lat <= 44.5 &&
+        lng >= -5 &&
+        lng <= 1
+    );
+
+}
+
+
+/* =========================
    CREAR MARCADORES
 ========================= */
 
 houses.forEach(h => {
 
+    const lat = Number(h.lat);
+    const lng = Number(h.lng);
+
+    if (!validCoordinates(h)) {
+
+        console.warn(
+            "Coordenadas inválidas para:",
+            h.name,
+            "lat:",
+            h.lat,
+            "lng:",
+            h.lng
+        );
+
+        return;
+
+    }
+
     const marker = L.marker(
-        [h.lat, h.lng],
+        [lat, lng],
         {
             icon: markerIcon(h.price)
         }
@@ -107,13 +146,25 @@ houses.forEach(h => {
    CENTRAR MAPA
 ========================= */
 
-const bounds = L.latLngBounds(
-    houses.map(h => [h.lat, h.lng])
+const validHouses = houses.filter(h =>
+    validCoordinates(h)
 );
 
-map.fitBounds(bounds, {
-    padding: [50, 50]
-});
+
+if (validHouses.length > 0) {
+
+    const bounds = L.latLngBounds(
+        validHouses.map(h => [
+            Number(h.lat),
+            Number(h.lng)
+        ])
+    );
+
+    map.fitBounds(bounds, {
+        padding: [50, 50]
+    });
+
+}
 
 
 /* =========================
@@ -274,13 +325,17 @@ function renderList() {
             "click",
             () => {
 
-                map.flyTo(
-                    [h.lat, h.lng],
-                    10,
-                    {
-                        duration: 0.5
-                    }
-                );
+                if (validCoordinates(h)) {
+
+                    map.flyTo(
+                        [h.lat, h.lng],
+                        10,
+                        {
+                            duration: 0.5
+                        }
+                    );
+
+                }
 
                 selectHouse(h.id);
 
@@ -453,20 +508,7 @@ function selectHouse(id) {
 
     /* =========================
        GOOGLE MAPS
-========================= */
-
-    /*
-       Ahora Google Maps utiliza el enlace
-       específico guardado en casas.js.
-
-       Ejemplo:
-
-       mapsUrl:
-       "https://www.google.com/maps/..."
-
-       Si la casa no tiene mapsUrl,
-       no se mostrará el botón.
-    */
+    ========================= */
 
     const mapsUrl =
         house.mapsUrl || "";
