@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1"
+
+>
+
+<title>Casa Rural Astorki Goikoa</title>
+
+<link rel="stylesheet" href="../css/styles.css">
+
+<style>
+
+.house-page{
+    max-width:1100px;
+    margin:0 auto;
+    padding:30px 20px 50px;
+}
+
+.back{
+    display:inline-block;
+    margin-bottom:20px;
+    color:var(--muted);
+    text-decoration:none;
+    font-size:13px;
+}
+
+.back:hover{
+    color:var(--red);
+}
+
+.house-header{
+    margin-bottom:25px;
+}
+
+.house-header h1{
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+.house-location{
+    color:var(--muted);
+    font-size:14px;
+}
+
+
+/* CARRUSEL */
+
+.carousel{
+    position:relative;
+    width:100%;
+    height:500px;
+    overflow:hidden;
+    border-radius:18px;
+    background:#edf1f5;
+}
+
+.carousel img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+
+.carousel-btn{
+    position:absolute;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:45px;
+    height:45px;
+
+    border:0;
+
+    border-radius:50%;
+
+    background:rgba(0,0,0,.55);
+
+    color:white;
+
+    font-size:30px;
+
+    cursor:pointer;
+
+    z-index:2;
+}
+
+.carousel-btn:hover{
+    background:rgba(0,0,0,.75);
+}
+
+.carousel-prev{
+    left:15px;
+}
+
+.carousel-next{
+    right:15px;
+}
+
+
+.carousel-dots{
+    position:absolute;
+
+    bottom:15px;
+
+    left:0;
+    right:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:7px;
+
+    z-index:2;
+}
+
+
+.carousel-dot{
+    width:9px;
+    height:9px;
+
+    border-radius:50%;
+
+    border:0;
+
+    padding:0;
+
+    background:rgba(255,255,255,.55);
+
+    cursor:pointer;
+}
+
+
+.carousel-dot.active{
+    background:white;
+    transform:scale(1.25);
+}
+
+
+/* INFORMACIÓN */
+
+.info{
+    margin-top:25px;
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:25px;
+}
+
+
+.info-card{
+    border:1px solid var(--line);
+
+    border-radius:16px;
+
+    padding:22px;
+
+    background:white;
+}
+
+
+.info-card h2{
+    margin-top:0;
+}
+
+
+.big-price{
+    font-size:32px;
+
+    color:var(--red);
+
+    font-weight:850;
+}
+
+
+.stats{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:10px;
+
+    margin:20px 0;
+}
+
+
+.stat{
+    padding:13px;
+
+    border-radius:10px;
+
+    background:var(--soft);
+
+    font-size:13px;
+}
+
+
+.description{
+    color:#46556a;
+
+    line-height:1.6;
+
+    font-size:14px;
+}
+
+
+.features{
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:8px;
+
+    margin-top:15px;
+}
+
+
+.feature{
+    background:var(--soft);
+
+    border-radius:7px;
+
+    padding:7px 10px;
+
+    font-size:12px;
+}
+
+
+.reserve{
+    display:block;
+
+    width:100%;
+
+    padding:13px;
+
+    border-radius:10px;
+
+    background:var(--red);
+
+    color:white;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    font-weight:800;
+
+    font-size:13px;
+
+    margin-top:15px;
+}
+
+
+@media(max-width:800px){
+
+    .house-page{
+        padding:20px 14px 40px;
+    }
+
+    .house-header h1{
+        font-size:25px;
+    }
+
+    .carousel{
+        height:300px;
+    }
+
+    .info{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="house-page">
+
+```
+<a
+    class="back"
+    href="../index.html">
+
+    ← Volver al mapa
+
+</a>
+
+
+<div class="house-header">
+
+    <h1>
+        Casa Rural Astorki Goikoa
+    </h1>
+
+    <div class="house-location">
+
+        📍 Bizkaia · zona de Mungia
+
+    </div>
+
+</div>
+
+
+<!-- =====================
+     CARRUSEL
+     ===================== -->
+
+<div class="carousel">
+
+    <img
+        id="carousel-image"
+        src="../fotos/astorki-goikoa/1.jpg"
+        alt="Casa Rural Astorki Goikoa"
+    >
+
+
+    <button
+        class="carousel-btn carousel-prev"
+        onclick="changePhoto(-1)"
+        aria-label="Foto anterior">
+
+        ‹
+
+    </button>
+
+
+    <button
+        class="carousel-btn carousel-next"
+        onclick="changePhoto(1)"
+        aria-label="Foto siguiente">
+
+        ›
+
+    </button>
+
+
+    <div class="carousel-dots">
+
+        <button
+            class="carousel-dot active"
+            onclick="setPhoto(0)"
+            aria-label="Foto 1">
+        </button>
+
+        <button
+            class="carousel-dot"
+            onclick="setPhoto(1)"
+            aria-label="Foto 2">
+        </button>
+
+        <button
+            class="carousel-dot"
+            onclick="setPhoto(2)"
+            aria-label="Foto 3">
+        </button>
+
+        <button
+            class="carousel-dot"
+            onclick="setPhoto(3)"
+            aria-label="Foto 4">
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================
+     INFORMACIÓN
+     ===================== -->
+
+<div class="info">
+
+
+    <div class="info-card">
+
+        <h2>
+            Sobre el alojamiento
+        </h2>
+
+
+        <div class="big-price">
+
+            440 €
+
+        </div>
+
+        <div class="sub">
+
+            Precio total orientativo
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <b>👥 Capacidad</b>
+
+                10 personas
+
+            </div>
+
+
+            <div class="stat">
+
+                <b>🛏 Habitaciones</b>
+
+                5 habitaciones
+
+            </div>
+
+        </div>
+
+
+        <p class="description">
+
+            Alojamiento rural para disfrutar de una
+            escapada en grupo. Añade aquí la descripción
+            real de la casa, equipamiento, ubicación,
+            condiciones y cualquier otra información
+            relevante.
+
+        </p>
+
+
+        <div class="features">
+
+            <span class="feature">
+                Jardín
+            </span>
+
+            <span class="feature">
+                Cocina equipada
+            </span>
+
+            <span class="feature">
+                Barbacoa
+            </span>
+
+            <span class="feature">
+                Wi-Fi
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="info-card">
+
+        <h2>
+            Reserva
+        </h2>
+
+
+        <p class="description">
+
+            Comprueba disponibilidad, precio final
+            y condiciones directamente con el alojamiento.
+
+        </p>
+
+
+        <a
+            class="reserve"
+            href="#"
+            target="_blank"
+            rel="noopener">
+
+            Ver anuncio / reservar ↗
+
+        </a>
+
+
+        <a
+            class="btn"
+            href="https://www.google.com/maps/dir/?api=1&destination=43.354,-2.78"
+            target="_blank"
+            rel="noopener"
+            style="margin-top:10px;">
+
+            Cómo llegar ↗
+
+        </a>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<script>
+
+/* =========================
+   FOTOS
+   ========================= */
+
+const photos = [
+
+    "../fotos/astorki-goikoa/1.jpg",
+
+    "../fotos/astorki-goikoa/2.jpg",
+
+    "../fotos/astorki-goikoa/3.jpg",
+
+    "../fotos/astorki-goikoa/4.jpg"
+
+];
+
+
+let currentPhoto = 0;
+
+
+function updatePhoto(){
+
+    document
+        .getElementById("carousel-image")
+        .src = photos[currentPhoto];
+
+
+    document
+        .querySelectorAll(".carousel-dot")
+        .forEach((dot,index)=>{
+
+            dot.classList.toggle(
+                "active",
+                index === currentPhoto
+            );
+
+        });
+
+}
+
+
+function changePhoto(direction){
+
+    currentPhoto += direction;
+
+
+    if(currentPhoto < 0){
+
+        currentPhoto =
+            photos.length - 1;
+
+    }
+
+
+    if(currentPhoto >= photos.length){
+
+        currentPhoto = 0;
+
+    }
+
+
+    updatePhoto();
+
+}
+
+
+function setPhoto(index){
+
+    currentPhoto = index;
+
+    updatePhoto();
+
+}
+
+</script>
+
+</body>
+</html>

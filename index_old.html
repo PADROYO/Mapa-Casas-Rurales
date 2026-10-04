@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comparador de casas rurales</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+:root{--red:#e63946;--ink:#17263c;--muted:#68768a;--line:#e4e9f0;--soft:#f4f7fb}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:#fff}
+.app{height:100vh;display:grid;grid-template-columns:390px 1fr;overflow:hidden}
+.sidebar{display:flex;flex-direction:column;min-height:0;border-right:1px solid var(--line);z-index:500;background:white}
+.header{padding:23px 22px 15px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.13em;font-weight:800;color:var(--red)}
+h1{font-size:23px;line-height:1.2;margin:7px 0 6px;letter-spacing:-.04em}.sub{color:var(--muted);font-size:13px}
+.filters{display:flex;gap:8px;padding:0 18px 15px;flex-wrap:wrap}.filters select,.search{border:1px solid var(--line);border-radius:12px;padding:10px 11px;background:#fff;color:var(--ink);font:inherit;font-size:12px;min-width:0}
+.search-wrap{padding:0 18px 14px}.search{width:100%;font-size:13px}
+.results{padding:0 14px 18px;overflow:auto;flex:1}.result-count{font-size:11px;color:var(--muted);font-weight:700;padding:0 5px 10px}
+.house{border:1px solid var(--line);border-radius:15px;padding:11px;display:grid;grid-template-columns:106px 1fr;gap:12px;margin-bottom:10px;cursor:pointer;transition:.15s;background:white}
+.house:hover,.house.active{border-color:#76a9ff;box-shadow:0 0 0 2px #e9f2ff}.house img{width:106px;height:105px;object-fit:cover;border-radius:10px;background:#edf1f5}
+.house h3{font-size:14px;margin:2px 0 5px}.place{font-size:11px;color:var(--muted);margin-bottom:8px}.price{font-size:21px;color:var(--red);font-weight:850;letter-spacing:-.04em}.price small{font-size:10px;color:var(--muted);font-weight:500;letter-spacing:0}
+.tags{font-size:11px;color:#59677b;display:flex;flex-wrap:wrap;gap:7px;margin-top:7px}.tag{background:var(--soft);border-radius:6px;padding:4px 6px}
+.map-wrap{position:relative;min-width:0;min-height:0}#map{height:100%;width:100%;background:#e5edf0}
+.map-note{position:absolute;z-index:400;top:16px;left:16px;background:white;border:1px solid var(--line);border-radius:12px;padding:10px 13px;box-shadow:0 5px 20px #10213a12;font-size:12px}
+.price-marker{background:var(--red);border:2px solid white;color:white;border-radius:9px;padding:6px 9px;font-weight:800;font-size:12px;box-shadow:0 2px 7px #1a2a3a35;white-space:nowrap}
+.leaflet-popup-content-wrapper{border-radius:14px}.popup-title{font-weight:800;font-size:14px;margin-bottom:4px}.popup-price{color:var(--red);font-weight:850;font-size:18px}.popup-link{display:inline-block;margin-top:8px;background:var(--red);color:white;text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:700;font-size:12px}
+.detail{position:absolute;z-index:450;right:18px;top:18px;width:320px;max-height:calc(100% - 36px);overflow:auto;background:white;border:1px solid #e8edf3;border-radius:18px;box-shadow:0 12px 40px #10213a24;display:none}
+.detail.show{display:block}.detail-photo{height:170px;width:100%;object-fit:cover;display:block;background:#edf1f5}.detail-body{padding:17px}.detail h2{font-size:20px;letter-spacing:-.04em;margin:0 0 5px}.detail .location{color:var(--muted);font-size:12px;margin-bottom:13px}.detail .bigprice{font-size:29px;color:var(--red);font-weight:850;letter-spacing:-.05em}.detail .bigprice span{font-size:12px;color:var(--muted);font-weight:500;letter-spacing:0}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:13px 0}.detail-stat{padding:10px;background:var(--soft);border-radius:10px;font-size:12px}.detail-stat b{display:block;margin-bottom:3px}.description{font-size:13px;line-height:1.55;color:#46556a}.actions{display:flex;flex-direction:column;gap:8px;margin-top:15px}.btn{display:block;text-align:center;border-radius:10px;padding:11px 12px;font-size:12px;font-weight:800;text-decoration:none;border:1px solid var(--line);color:var(--ink);background:white}.btn.primary{background:var(--red);border-color:var(--red);color:white}.close{float:right;border:0;background:#f1f4f8;border-radius:50%;width:29px;height:29px;cursor:pointer;font-size:17px}
+.empty{padding:20px;color:var(--muted);font-size:13px}.footer{font-size:10px;color:#8a95a5;padding:8px 18px;border-top:1px solid var(--line)}
+@media(max-width:800px){.app{height:auto;min-height:100vh;display:flex;flex-direction:column;overflow:visible}.sidebar{border-right:0}.header{padding:18px 17px 12px}.filters{padding:0 15px 12px}.search-wrap{padding:0 15px 12px}.results{max-height:42vh;padding:0 12px 12px}.house{grid-template-columns:85px 1fr}.house img{width:85px;height:90px}.map-wrap{height:65vh;min-height:440px}.map-note{top:10px;left:10px}.detail{top:58px;right:10px;width:min(310px,calc(100% - 20px));max-height:calc(100% - 70px)}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="header">
+      <div class="eyebrow">Planifica tu escapada</div>
+      <h1>Casas rurales · Comparador</h1>
+      <div class="sub" id="subtitle">Alojamientos por el País Vasco y alrededores</div>
+    </div>
+    <div class="filters">
+      <select id="sort" aria-label="Ordenar por"><option value="recommended">Orden recomendado</option><option value="priceAsc">Precio: menor a mayor</option><option value="priceDesc">Precio: mayor a menor</option></select>
+      <select id="people" aria-label="Número de personas"><option value="0">Cualquier grupo</option><option value="8">8+ personas</option><option value="10">10+ personas</option><option value="12">12+ personas</option></select>
+    </div>
+    <div class="search-wrap"><input class="search" id="search" placeholder="Buscar por nombre o zona…" aria-label="Buscar alojamiento"></div>
+    <div class="results"><div class="result-count" id="count"></div><div id="list"></div></div>
+    <div class="footer">Plantilla editable · Los alojamientos y precios de ejemplo deben sustituirse por los reales.</div>
+  </aside>
+  <main class="map-wrap">
+    <div id="map" aria-label="Mapa de alojamientos"></div>
+    <div class="map-note">📍 Pulsa un precio o alojamiento para ver detalles</div>
+    <section class="detail" id="detail" aria-live="polite"></section>
+  </main>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+/*
+  PERSONALIZA LOS ALOJAMIENTOS AQUÍ:
+  price = precio total del alojamiento (indica si es por noche o por estancia).
+  lat/lng = coordenadas del alojamiento; búscalas en Google Maps.
+  image = URL de una foto pública.
+  bookingUrl = enlace al anuncio o web oficial.
+*/
+const houses = [
+ {id:1,name:"Casa Rural Astorki Goikoa",area:"Bizkaia · zona de Mungia",price:440,people:10,rooms:5,lat:43.354,lng:-2.78,image:"https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=700&q=80",description:"Alojamiento rural para disfrutar de una escapada en grupo. Añade aquí la descripción, equipamiento y condiciones.",bookingUrl:"",features:["Jardín","Cocina equipada"]},
+ {id:2,name:"Casa Rural Erreteneko Borda",area:"Gipuzkoa · zona de Irun",price:580,people:10,rooms:5,lat:43.302,lng:-1.79,image:"https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=700&q=80",description:"Casa rural rodeada de naturaleza. Sustituye este texto por los datos reales del alojamiento.",bookingUrl:"",features:["Terraza","Barbacoa"]},
+ {id:3,name:"Casa Rural Zimitxu",area:"Gipuzkoa · interior",price:900,people:12,rooms:6,lat:43.235,lng:-1.57,image:"https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=700&q=80",description:"Descripción del alojamiento, ubicación, normas y cualquier información útil para el grupo.",bookingUrl:"",features:["Jardín","Parking"]},
+ {id:4,name:"Casa Rural Garbizaita",area:"Gipuzkoa · zona de Oiartzun",price:630,people:10,rooms:5,lat:43.205,lng:-1.82,image:"https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=700&q=80",description:"Añade aquí los detalles de la casa y lo que incluye el precio.",bookingUrl:"",features:["Cocina equipada","Wi-Fi"]},
+ {id:5,name:"Casa Rural Arriaran",area:"Gipuzkoa · interior",price:800,people:12,rooms:6,lat:43.125,lng:-2.03,image:"https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=700&q=80",description:"Alojamiento para grupos. Completa esta ficha con la información confirmada.",bookingUrl:"",features:["Vistas","Jardín"]},
+ {id:6,name:"Casa Rural Erburu",area:"Navarra · zona de Sakana",price:720,people:10,rooms:5,lat:42.91,lng:-2.02,image:"https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=700&q=80",description:"Información sobre capacidad, habitaciones, servicios y condiciones de reserva.",bookingUrl:"",features:["Barbacoa","Parking"]},
+ {id:7,name:"Casa Rural Nabarro I",area:"Navarra · zona de Estella",price:669,people:10,rooms:5,lat:42.70,lng:-1.95,image:"https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=700&q=80",description:"Incluye aquí los detalles que os ayuden a comparar las opciones.",bookingUrl:"",features:["Jardín","Terraza"]},
+ {id:8,name:"Casa Rural IZARGI",area:"Navarra · zona de Estella",price:850,people:12,rooms:6,lat:42.61,lng:-1.78,image:"https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=700&q=80",description:"Añade información real del alojamiento, política de cancelación y precio final.",bookingUrl:"",features:["Cocina equipada","Barbacoa"]},
+ {id:9,name:"Casa Landa",area:"Álava · zona de Miranda",price:700,people:10,rooms:5,lat:42.72,lng:-3.10,image:"https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=700&q=80",description:"Casa rural para grupos, con espacio común y entorno natural. Edita esta descripción.",bookingUrl:"",features:["Jardín","Parking"]},
+ {id:10,name:"La casa de las Tinas",area:"La Rioja · zona de Haro",price:810,people:10,rooms:5,lat:42.56,lng:-2.85,image:"https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=700&q=80",description:"Añade los servicios incluidos, la distancia y las condiciones relevantes.",bookingUrl:"",features:["Terraza","Cocina equipada"]},
+ {id:11,name:"Casa Rural Baratza",area:"Burgos · zona de Oña",price:761,people:8,rooms:4,lat:42.74,lng:-3.41,image:"https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=700&q=80",description:"Completa esta ficha con los datos de la casa y el enlace donde se puede reservar.",bookingUrl:"",features:["Entorno rural","Cocina"]},
+ {id:12,name:"Casa Rural Enarakabi",area:"Navarra · zona de Pamplona",price:900,people:12,rooms:6,lat:42.78,lng:-1.55,image:"https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=700&q=80",description:"Indica aquí las condiciones, servicios, capacidad y precio total.",bookingUrl:"",features:["Jardín","Barbacoa"]}
+];
+const money=n=>new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n);
+const map=L.map('map',{scrollWheelZoom:true}).setView([42.95,-2.15],8);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+const markers=new Map();let selectedId=null;
+function markerIcon(price){return L.divIcon({className:'',html:`<div class="price-marker">${money(price)}</div>`,iconSize:null,iconAnchor:[35,17]})}
+houses.forEach(h=>{const m=L.marker([h.lat,h.lng],{icon:markerIcon(h.price)}).addTo(map);m.on('click',()=>selectHouse(h.id,true));markers.set(h.id,m)});
+function visibleHouses(){
+ let arr=houses.filter(h=>{const q=document.getElementById('search').value.trim().toLowerCase();const min=Number(document.getElementById('people').value);return (!q||(h.name+' '+h.area).toLowerCase().includes(q))&&h.people>=min});
+ const sort=document.getElementById('sort').value;if(sort==='priceAsc')arr.sort((a,b)=>a.price-b.price);if(sort==='priceDesc')arr.sort((a,b)=>b.price-a.price);return arr;
+}
+function renderList(){const arr=visibleHouses();document.getElementById('count').textContent=`${arr.length} alojamiento${arr.length===1?'':'s'}`;document.getElementById('subtitle').textContent=`${houses.length} alojamientos · precios orientativos`;const list=document.getElementById('list');list.innerHTML='';
+ if(!arr.length){list.innerHTML='<div class="empty">No hay alojamientos que coincidan con la búsqueda.</div>';return}
+ arr.forEach(h=>{const el=document.createElement('article');el.className='house'+(h.id===selectedId?' active':'');el.innerHTML=`<img src="${h.image}" alt="" loading="lazy"><div><h3>${escapeHtml(h.name)}</h3><div class="place">⌖ ${escapeHtml(h.area)}</div><div class="price">${money(h.price)} <small>total*</small></div><div class="tags"><span>👥 ${h.people} personas</span><span>▤ ${h.rooms} hab.</span></div><div class="tags">${h.features.slice(0,2).map(f=>`<span class="tag">${escapeHtml(f)}</span>`).join('')}</div></div>`;el.addEventListener('click',()=>selectHouse(h.id,true));list.appendChild(el)});
+ markers.forEach((m,id)=>{if(arr.some(h=>h.id===id)){if(!map.hasLayer(m))m.addTo(map)}else if(map.hasLayer(m))map.removeLayer(m)});
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function selectHouse(id,pan){const h=houses.find(x=>x.id===id);if(!h)return;selectedId=id;const d=document.getElementById('detail');d.classList.add('show');const booking=h.bookingUrl?`<a class="btn primary" href="${escapeHtml(h.bookingUrl)}" target="_blank" rel="noopener">Ver anuncio / reservar ↗</a>`:`<button class="btn primary" onclick="copyHouseLink(${h.id})">Copiar resumen del alojamiento</button>`;d.innerHTML=`<img class="detail-photo" src="${h.image}" alt="Foto de ${escapeHtml(h.name)}"><div class="detail-body"><button class="close" onclick="closeDetail()" aria-label="Cerrar">×</button><h2>${escapeHtml(h.name)}</h2><div class="location">⌖ ${escapeHtml(h.area)}</div><div class="bigprice">${money(h.price)} <span>precio total orientativo*</span></div><div class="detail-grid"><div class="detail-stat"><b>👥 Capacidad</b>${h.people} personas</div><div class="detail-stat"><b>🛏 Habitaciones</b>${h.rooms}</div></div><div class="tags">${h.features.map(f=>`<span class="tag">${escapeHtml(f)}</span>`).join('')}</div><p class="description">${escapeHtml(h.description)}</p><div class="actions">${booking}<a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=${h.lat},${h.lng}" target="_blank" rel="noopener">Cómo llegar ↗</a><button class="btn" onclick="copyDetails(${h.id})">Copiar detalles</button></div><p style="font-size:10px;color:#8a95a5;line-height:1.45">*Comprueba fechas, tasas y precio final con el alojamiento. Los datos de esta plantilla son ejemplos editables.</p></div>`;
+ renderList();if(pan){map.flyTo([h.lat,h.lng],10,{duration:.5});markers.get(id).openPopup()} }
+function closeDetail(){document.getElementById('detail').classList.remove('show');selectedId=null;renderList()}
+function copyDetails(id){const h=houses.find(x=>x.id===id);const text=`${h.name}\n${h.area}\nPrecio orientativo: ${money(h.price)}\nCapacidad: ${h.people} personas\nHabitaciones: ${h.rooms}\n${h.description}\n${h.bookingUrl||''}`;navigator.clipboard?.writeText(text).then(()=>alert('Detalles copiados.')).catch(()=>prompt('Copia este texto:',text))}
+function copyHouseLink(id){copyDetails(id)}
+document.getElementById('search').addEventListener('input',renderList);document.getElementById('people').addEventListener('change',renderList);document.getElementById('sort').addEventListener('change',renderList);
+houses.forEach(h=>markers.get(h.id).bindPopup(`<div class="popup-title">${escapeHtml(h.name)}</div><div>${escapeHtml(h.area)}</div><div class="popup-price">${money(h.price)}</div><button style="margin-top:7px;border:0;background:#e63946;color:white;border-radius:7px;padding:7px 9px;cursor:pointer" onclick="selectHouse(${h.id},false)">Ver ficha</button>`));
+renderList();
+</script>
+</body>
+</html>
