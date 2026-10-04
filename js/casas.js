@@ -124,8 +124,8 @@ const houses = [
         people: 12,
         rooms: 6,
 
-        lat: 43.125,
-        lng: -2.03,
+        lat: 43.084021, 
+        lng: -1.888885,
 
         image: "casas/arriaran/1.jpg",
 
@@ -141,7 +141,7 @@ const houses = [
             "Jardín"
         ],
 
-        bookingUrl: ""
+        bookingUrl: "https://www.booking.com/Share-pvqq14"
     },
 
 
