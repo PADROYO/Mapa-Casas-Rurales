@@ -25,6 +25,8 @@ const houses = [
             "Cocina equipada"
         ],
 
+        mapsUrl: "",
+
         bookingUrl: ""
     },
 
@@ -53,6 +55,8 @@ const houses = [
             "Terraza",
             "Barbacoa"
         ],
+
+        mapsUrl: "",
 
         bookingUrl: ""
     },
@@ -83,6 +87,8 @@ const houses = [
             "Parking"
         ],
 
+        mapsUrl: "",
+
         bookingUrl: ""
     },
 
@@ -111,6 +117,8 @@ const houses = [
             "Cocina equipada",
             "Wi-Fi"
         ],
+
+        mapsUrl: "",
 
         bookingUrl: ""
     },
@@ -141,6 +149,8 @@ const houses = [
             "Jardín"
         ],
 
+        mapsUrl: "https://maps.app.goo.gl/DzKfSaFZN8KoHnjr6",
+
         bookingUrl: "https://www.booking.com/Share-pvqq14"
     },
 
@@ -169,6 +179,8 @@ const houses = [
             "Barbacoa",
             "Parking"
         ],
+
+        mapsUrl: "",
 
         bookingUrl: ""
     },
@@ -199,6 +211,8 @@ const houses = [
             "Terraza"
         ],
 
+        mapsUrl: "",
+
         bookingUrl: ""
     },
 
@@ -227,6 +241,8 @@ const houses = [
             "Cocina equipada",
             "Barbacoa"
         ],
+
+        mapsUrl: "",
 
         bookingUrl: ""
     },
@@ -257,6 +273,8 @@ const houses = [
             "Parking"
         ],
 
+        mapsUrl: "",
+
         bookingUrl: ""
     },
 
@@ -285,6 +303,8 @@ const houses = [
             "Terraza",
             "Cocina equipada"
         ],
+
+        mapsUrl: "",
 
         bookingUrl: ""
     },
@@ -315,6 +335,8 @@ const houses = [
             "Cocina"
         ],
 
+        mapsUrl: "",
+
         bookingUrl: ""
     },
 
@@ -343,6 +365,8 @@ const houses = [
             "Jardín",
             "Barbacoa"
         ],
+
+        mapsUrl: "",
 
         bookingUrl: ""
     }

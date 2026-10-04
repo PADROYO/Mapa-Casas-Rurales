@@ -453,10 +453,23 @@ function selectHouse(id) {
 
     /* =========================
        GOOGLE MAPS
-    ========================= */
+========================= */
+
+    /*
+       Ahora Google Maps utiliza el enlace
+       específico guardado en casas.js.
+
+       Ejemplo:
+
+       mapsUrl:
+       "https://www.google.com/maps/..."
+
+       Si la casa no tiene mapsUrl,
+       no se mostrará el botón.
+    */
 
     const mapsUrl =
-        `https://www.google.com/maps/dir/?api=1&destination=${house.lat},${house.lng}`;
+        house.mapsUrl || "";
 
 
     /* =========================
@@ -647,15 +660,25 @@ function selectHouse(id) {
 
             <div class="detail-actions">
 
-                <a
-                    href="${mapsUrl}"
-                    target="_blank"
-                    rel="noopener"
-                    class="detail-button">
+                ${
+                    mapsUrl
+                    ?
+                    `
 
-                    Cómo llegar ↗
+                    <a
+                        href="${escapeHtml(mapsUrl)}"
+                        target="_blank"
+                        rel="noopener"
+                        class="detail-button">
 
-                </a>
+                        Cómo llegar ↗
+
+                    </a>
+
+                    `
+                    :
+                    ""
+                }
 
 
                 ${
