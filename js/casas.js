@@ -25,9 +25,9 @@ const houses = [
             "Cocina equipada"
         ],
 
-        mapsUrl: "",
+        mapsUrl: "https://maps.app.goo.gl/rXNCunCTE8rgQzXi9",
 
-        bookingUrl: ""
+        bookingUrl: "https://www.booking.com/Share-6I7jML"
     },
 
 
@@ -45,7 +45,7 @@ const houses = [
         image: "casas/erreteneko-borda/1.jpg",
 
         photos: Array.from(
-            { length: 23 },
+            { length: 21 },
             (_, i) => `casas/erreteneko-borda/${i + 1}.jpg`
         ),
 
@@ -56,9 +56,9 @@ const houses = [
             "Barbacoa"
         ],
 
-        mapsUrl: "",
+        mapsUrl: "https://maps.app.goo.gl/skTs6RapQtzYWHAv8",
 
-        bookingUrl: ""
+        bookingUrl: "https://www.booking.com/Share-tRCHDko"
     },
 
 
@@ -76,7 +76,7 @@ const houses = [
         image: "casas/zimitxu/1.jpg",
 
         photos: Array.from(
-            { length: 23 },
+            { length: 12 },
             (_, i) => `casas/zimitxu/${i + 1}.jpg`
         ),
 
@@ -87,9 +87,9 @@ const houses = [
             "Parking"
         ],
 
-        mapsUrl: "",
+        mapsUrl: "https://maps.app.goo.gl/qsy6VkgKHUYCX7uE7",
 
-        bookingUrl: ""
+        bookingUrl: "https://www.booking.com/Share-WQKCwH8"
     },
 
 
@@ -107,7 +107,7 @@ const houses = [
         image: "casas/garbizaita/1.jpg",
 
         photos: Array.from(
-            { length: 23 },
+            { length: 17 },
             (_, i) => `casas/garbizaita/${i + 1}.jpg`
         ),
 
@@ -118,9 +118,9 @@ const houses = [
             "Wi-Fi"
         ],
 
-        mapsUrl: "",
+        mapsUrl: "https://maps.app.goo.gl/PzkFoHwtEV1gpeki6",
 
-        bookingUrl: ""
+        bookingUrl: "https://www.booking.com/Share-A8WuEq"
     },
 
 
@@ -169,7 +169,7 @@ const houses = [
         image: "casas/erburu/1.jpg",
 
         photos: Array.from(
-            { length: 23 },
+            { length: 16 },
             (_, i) => `casas/erburu/${i + 1}.jpg`
         ),
 
@@ -180,9 +180,9 @@ const houses = [
             "Parking"
         ],
 
-        mapsUrl: "",
+        mapsUrl: "https://maps.app.goo.gl/b4cYjnXWaMFBfUnW6",
 
-        bookingUrl: ""
+        bookingUrl: "https://www.booking.com/Share-K5NLs6T"
     },
 
 
@@ -200,7 +200,7 @@ const houses = [
         image: "casas/nabarro-i/1.jpg",
 
         photos: Array.from(
-            { length: 23 },
+            { length: 18 },
             (_, i) => `casas/nabarro-i/${i + 1}.jpg`
         ),
 
@@ -211,15 +211,15 @@ const houses = [
             "Terraza"
         ],
 
-        mapsUrl: "",
+        mapsUrl: "https://maps.app.goo.gl/CoNgLFCyPXkceUCo7",
 
-        bookingUrl: ""
+        bookingUrl: "https://www.booking.com/Share-UAnY3W"
     },
 
 
     {
         id: 8,
-        name: "Casa Rural IZARGI",
+        name: "Casa Rural Izargi",
         area: "Navarra · zona de Estella",
         price: 850,
         people: 12,
@@ -231,7 +231,7 @@ const houses = [
         image: "casas/izargi/1.jpg",
 
         photos: Array.from(
-            { length: 23 },
+            { length: 11 },
             (_, i) => `casas/izargi/${i + 1}.jpg`
         ),
 
@@ -242,9 +242,9 @@ const houses = [
             "Barbacoa"
         ],
 
-        mapsUrl: "",
+        mapsUrl: "https://maps.app.goo.gl/mq5t6R36Ds2odNqx9",
 
-        bookingUrl: ""
+        bookingUrl: "https://www.booking.com/Share-tDiQPU"
     },
 
 
@@ -262,7 +262,7 @@ const houses = [
         image: "casas/casa-landa/1.jpg",
 
         photos: Array.from(
-            { length: 23 },
+            { length: 10 },
             (_, i) => `casas/casa-landa/${i + 1}.jpg`
         ),
 
@@ -273,9 +273,9 @@ const houses = [
             "Parking"
         ],
 
-        mapsUrl: "",
+        mapsUrl: "https://maps.app.goo.gl/HrHq7EW3pbBBjww68",
 
-        bookingUrl: ""
+        bookingUrl: "https://www.booking.com/Share-mjnskwz"
     },
 
 
@@ -293,7 +293,7 @@ const houses = [
         image: "casas/casa-tinas/1.jpg",
 
         photos: Array.from(
-            { length: 23 },
+            { length: 15 },
             (_, i) => `casas/casa-tinas/${i + 1}.jpg`
         ),
 
@@ -304,9 +304,9 @@ const houses = [
             "Cocina equipada"
         ],
 
-        mapsUrl: "",
+        mapsUrl: "https://maps.app.goo.gl/yHNvyWFSrdWktgkS7",
 
-        bookingUrl: ""
+        bookingUrl: "https://www.booking.com/Share-O6obdF"
     },
 
 
@@ -324,7 +324,7 @@ const houses = [
         image: "casas/baratza/1.jpg",
 
         photos: Array.from(
-            { length: 23 },
+            { length: 16 },
             (_, i) => `casas/baratza/${i + 1}.jpg`
         ),
 
@@ -335,9 +335,9 @@ const houses = [
             "Cocina"
         ],
 
-        mapsUrl: "",
+        mapsUrl: "https://maps.app.goo.gl/YYTxvJod2kffpt8T7",
 
-        bookingUrl: ""
+        bookingUrl: "https://www.booking.com/Share-2HXV7Y0"
     },
 
 
@@ -355,7 +355,7 @@ const houses = [
         image: "casas/enarakabi/1.jpg",
 
         photos: Array.from(
-            { length: 23 },
+            { length: 19 },
             (_, i) => `casas/enarakabi/${i + 1}.jpg`
         ),
 
@@ -366,9 +366,102 @@ const houses = [
             "Barbacoa"
         ],
 
-        mapsUrl: "",
+        mapsUrl: "https://maps.app.goo.gl/P8ZFS5agiHNqVJLV9",
 
-        bookingUrl: ""
-    }
+        bookingUrl: "https://www.booking.com/Share-Mh4x5w"
+    },
 
+
+    {
+        id: 13,
+        name: "Casa Rural Valle Ulzama",
+        area: "Navarra · zona de Pamplona",
+        price: 800,
+        people: 12,
+        rooms: 6,
+
+        lat: 0,
+        lng: 0,
+
+        image: "casas/valle-ulzama/1.jpg",
+
+        photos: Array.from(
+            { length: 16 },
+            (_, i) => `casas/astorki-goikoa/${i + 1}.jpg`
+        ),
+
+        description: "Alojamiento rural para disfrutar de una escapada en grupo. Añade aquí la descripción, equipamiento y condiciones.",
+
+        features: [
+            "Jardín",
+            "Cocina equipada",
+            "Piscina"
+        ],
+
+        mapsUrl: "https://maps.app.goo.gl/41Rom2G6uEFVmRLo8",
+
+        bookingUrl: "https://www.booking.com/Share-nwCbZD"
+    },
+
+
+    {
+        id: 14,
+        name: "Casa Rural Arotzenia",
+        area: "Navarra · zona de Pamplona",
+        price: 800,
+        people: 12,
+        rooms: 4,
+
+        lat: 0,
+        lng: 0,
+
+        image: "casas/arotzenia/1.jpg",
+
+        photos: Array.from(
+            { length: 18 },
+            (_, i) => `casas/astorki-goikoa/${i + 1}.jpg`
+        ),
+
+        description: "Alojamiento rural para disfrutar de una escapada en grupo. Añade aquí la descripción, equipamiento y condiciones.",
+
+        features: [
+            "Jardín",
+            "Cocina equipada",
+            "Piscina"
+        ],
+
+        mapsUrl: "https://maps.app.goo.gl/7QAuaa2QNC19VuqH9",
+
+        bookingUrl: "https://www.booking.com/Share-29F18v"
+    },
+
+
+    {
+        id: 14,
+        name: "Casa Rural Balentzenea",
+        area: "Gipuzkoa · zona de Irun",
+        price: 630,
+        people: 10,
+        rooms: 4,
+
+        lat: 0,
+        lng: 0,
+
+        image: "casas/balentzenea/1.jpg",
+
+        photos: Array.from(
+            { length: 20 },
+            (_, i) => `casas/astorki-goikoa/${i + 1}.jpg`
+        ),
+
+        description: "Alojamiento rural para disfrutar de una escapada en grupo. Añade aquí la descripción, equipamiento y condiciones.",
+
+        features: [
+            "Cocina equipada"
+        ],
+
+        mapsUrl: "https://maps.app.goo.gl/e5KCJujtWTNWqFZdA",
+
+        bookingUrl: "https://www.booking.com/Share-ObYrTb"
+    },
 ];
