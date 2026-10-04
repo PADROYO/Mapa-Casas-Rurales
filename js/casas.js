@@ -13,6 +13,11 @@ const houses = [
 
         image: "casas/astorki-goikoa/1.jpg",
 
+        photos: Array.from(
+            { length: 23 },
+            (_, i) => `casas/astorki-goikoa/${i + 1}.jpg`
+        ),
+
         description: "Alojamiento rural para disfrutar de una escapada en grupo. Añade aquí la descripción, equipamiento y condiciones.",
 
         features: [
@@ -93,15 +98,21 @@ const houses = [
         lat: 43.205,
         lng: -1.82,
 
-        image: "casas/garbizaita/fotos/1.jpg",
-        page: "casas/garbizaita/index.html",
+        image: "casas/garbizaita/1.jpg",
+
+        photos: Array.from(
+            { length: 23 },
+            (_, i) => `casas/garbizaita/${i + 1}.jpg`
+        ),
 
         description: "Añade aquí los detalles de la casa y lo que incluye el precio.",
 
         features: [
             "Cocina equipada",
             "Wi-Fi"
-        ]
+        ],
+
+        bookingUrl: ""
     },
 
 
@@ -116,15 +127,21 @@ const houses = [
         lat: 43.125,
         lng: -2.03,
 
-        image: "casas/arriaran/fotos/1.jpg",
-        page: "casas/arriaran/index.html",
+        image: "casas/arriaran/1.jpg",
+
+        photos: Array.from(
+            { length: 23 },
+            (_, i) => `casas/arriaran/${i + 1}.jpg`
+        ),
 
         description: "Alojamiento para grupos. Completa esta ficha con la información confirmada.",
 
         features: [
             "Vistas",
             "Jardín"
-        ]
+        ],
+
+        bookingUrl: ""
     },
 
 
@@ -139,15 +156,21 @@ const houses = [
         lat: 42.91,
         lng: -2.02,
 
-        image: "casas/erburu/fotos/1.jpg",
-        page: "casas/erburu/index.html",
+        image: "casas/erburu/1.jpg",
+
+        photos: Array.from(
+            { length: 23 },
+            (_, i) => `casas/erburu/${i + 1}.jpg`
+        ),
 
         description: "Información sobre capacidad, habitaciones, servicios y condiciones de reserva.",
 
         features: [
             "Barbacoa",
             "Parking"
-        ]
+        ],
+
+        bookingUrl: ""
     },
 
 
@@ -162,15 +185,21 @@ const houses = [
         lat: 42.70,
         lng: -1.95,
 
-        image: "casas/nabarro-i/fotos/1.jpg",
-        page: "casas/nabarro-i/index.html",
+        image: "casas/nabarro-i/1.jpg",
+
+        photos: Array.from(
+            { length: 23 },
+            (_, i) => `casas/nabarro-i/${i + 1}.jpg`
+        ),
 
         description: "Incluye aquí los detalles que os ayuden a comparar las opciones.",
 
         features: [
             "Jardín",
             "Terraza"
-        ]
+        ],
+
+        bookingUrl: ""
     },
 
 
@@ -185,15 +214,21 @@ const houses = [
         lat: 42.61,
         lng: -1.78,
 
-        image: "casas/izargi/fotos/1.jpg",
-        page: "casas/izargi/index.html",
+        image: "casas/izargi/1.jpg",
+
+        photos: Array.from(
+            { length: 23 },
+            (_, i) => `casas/izargi/${i + 1}.jpg`
+        ),
 
         description: "Añade información real del alojamiento, política de cancelación y precio final.",
 
         features: [
             "Cocina equipada",
             "Barbacoa"
-        ]
+        ],
+
+        bookingUrl: ""
     },
 
 
@@ -208,15 +243,21 @@ const houses = [
         lat: 42.72,
         lng: -3.10,
 
-        image: "casas/casa-landa/fotos/1.jpg",
-        page: "casas/casa-landa/index.html",
+        image: "casas/casa-landa/1.jpg",
+
+        photos: Array.from(
+            { length: 23 },
+            (_, i) => `casas/casa-landa/${i + 1}.jpg`
+        ),
 
         description: "Casa rural para grupos, con espacio común y entorno natural. Edita esta descripción.",
 
         features: [
             "Jardín",
             "Parking"
-        ]
+        ],
+
+        bookingUrl: ""
     },
 
 
@@ -231,15 +272,21 @@ const houses = [
         lat: 42.56,
         lng: -2.85,
 
-        image: "casas/casa-tinas/fotos/1.jpg",
-        page: "casas/casa-tinas/index.html",
+        image: "casas/casa-tinas/1.jpg",
+
+        photos: Array.from(
+            { length: 23 },
+            (_, i) => `casas/casa-tinas/${i + 1}.jpg`
+        ),
 
         description: "Añade los servicios incluidos, la distancia y las condiciones relevantes.",
 
         features: [
             "Terraza",
             "Cocina equipada"
-        ]
+        ],
+
+        bookingUrl: ""
     },
 
 
@@ -254,15 +301,21 @@ const houses = [
         lat: 42.74,
         lng: -3.41,
 
-        image: "casas/baratza/fotos/1.jpg",
-        page: "casas/baratza/index.html",
+        image: "casas/baratza/1.jpg",
+
+        photos: Array.from(
+            { length: 23 },
+            (_, i) => `casas/baratza/${i + 1}.jpg`
+        ),
 
         description: "Completa esta ficha con los datos de la casa y el enlace donde se puede reservar.",
 
         features: [
             "Entorno rural",
             "Cocina"
-        ]
+        ],
+
+        bookingUrl: ""
     },
 
 
@@ -277,15 +330,21 @@ const houses = [
         lat: 42.78,
         lng: -1.55,
 
-        image: "casas/enarakabi/fotos/1.jpg",
-        page: "casas/enarakabi/index.html",
+        image: "casas/enarakabi/1.jpg",
+
+        photos: Array.from(
+            { length: 23 },
+            (_, i) => `casas/enarakabi/${i + 1}.jpg`
+        ),
 
         description: "Indica aquí las condiciones, servicios, capacidad y precio total.",
 
         features: [
             "Jardín",
             "Barbacoa"
-        ]
+        ],
+
+        bookingUrl: ""
     }
 
 ];
